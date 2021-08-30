@@ -1,0 +1,38 @@
+---
+octobox_service_name: 'octobox'
+octobox_service_path: '/docker/{{ octobox_service_name }}'
+octobox_compose_file: '{{ octobox_service_path }}/docker-compose.yml'
+
+# General
+octobox_domain: 'gh.status.im'
+# Oauth
+octobox_oauth_client_id: '{{lookup("bitwarden", "octobox/oauth", field="id")}}'
+octobox_oauth_secret: '{{lookup("bitwarden", "octobox/oauth", field="secret")}}'
+# Cookies
+octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secret")}}'
+
+# App --------------------------------------------------------------------------
+octobox_app_cont_name: '{{ octobox_service_name }}-app'
+octobox_app_cont_vol: '{{ octobox_service_path }}/app'
+octobox_app_cont_digest: 'sha256:8aaf878e545efb87af747a480927de89bbb62cc3b80dca8e5119dd783e6af174'
+octobox_app_cont_image: 'octoboxio/octobox@{{ octobox_app_cont_digest }}'
+octobox_app_cont_port: 3000
+# Database ---------------------------------------------------------------------
+octobox_db_cont_name: '{{ octobox_service_name }}-db'
+octobox_db_cont_vol: '{{ octobox_service_path }}/db'
+octobox_db_cont_image: 'postgres:9.6-alpine'
+octobox_db_cont_uid: 70
+octobox_db_host_uid: '{{ 100000 + octobox_db_cont_uid | int }}'
+octobox_db_name: 'octobox'
+octobox_db_user: '{{lookup("bitwarden", "octobox/db", field="username")}}'
+octobox_db_pass: '{{lookup("bitwarden", "octobox/db", field="password")}}'
+# Cache ------------------------------------------------------------------------
+octobox_cache_cont_name: '{{ octobox_service_name }}-cache'
+octobox_cache_cont_vol: '{{ octobox_service_path }}/cache'
+octobox_cache_cont_image: 'redis:3.2-alpine'
+# ------------------------------------------------------------------------------
+
+# General container management
+compose_recreate: 'smart'
+compose_state: 'present'
+compose_restart: false

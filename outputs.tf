@@ -3,5 +3,6 @@ output "hosts" {
     module.gitea.hosts,
     module.keycloak.hosts,
     module.nextcloud.hosts,
+    module.todo.hosts,
   )
 }

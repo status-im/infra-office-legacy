@@ -1,0 +1,26 @@
+---
+- name: Enable Wekan HTTP & HTTPS ports
+  iptables:
+    comment: 'HTTP & HTTPS'
+    chain: INPUT
+    jump: ACCEPT
+    source: '0.0.0.0/0'
+    protocol: 'tcp'
+    destination_port: '{{ item | int }}'
+  with_items:
+    - 80
+    - 443
+  notify:
+    - Save iptables rules
+
+- name: Enable Wekan container ports
+  iptables:
+    comment: Postgres ADM
+    action: insert
+    chain: DOCKER-USER
+    jump: ACCEPT
+    source: '0.0.0.0/0'
+    protocol: 'tcp'
+    destination_port: '{{ wekan_cont_port | int }}'
+  notify:
+    - Save iptables rules

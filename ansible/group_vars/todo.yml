@@ -1,0 +1,108 @@
+---
+swap_file_size_mb: 4096
+
+# HackMD
+hackmd_domain: 'notes.status.im'
+hackmd_db_user: '{{lookup("bitwarden", "hackmd/db", field="username")}}'
+hackmd_db_pass: '{{lookup("bitwarden", "hackmd/db", field="password")}}'
+# Google oauth
+hackmd_gg_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/google", field="client-id") }}'
+hackmd_gg_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/google", field="secret") }}'
+# GitHub oauth
+hackmd_gh_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/github", field="client-id") }}'
+hackmd_gh_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/github", field="secret") }}'
+hackmd_gh_oauth_orgs: ['status-im']
+
+# Wekan
+wekan_domain: 'boards.status.im'
+# SMTP
+wekan_smtp_port: 587
+wekan_smtp_host: 'smtp.mailgun.org'
+wekan_smtp_user: '{{lookup("bitwarden", "MailGun", field="smtp-user")}}'
+wekan_smtp_pass: '{{lookup("bitwarden", "MailGun", field="smtp-pass")}}'
+wekan_smtp_from: 'Status.im Wekan Boards <wekan@mgun.status.im>'
+
+# Shlink URL shortener
+shlink_domain: 'link.status.im'
+shlink_admin_domain: 'admin-link.status.im'
+shlink_fallback_url: 'https://status.im/'
+shlink_db_cont_port: 5434
+shlink_app_cont_port: 8081
+shlink_web_cont_port: 8090
+shlink_oauth_cont_port: 8091
+# Admin OAuth
+shlink_oauth_google_domain: 'status.im'
+shlink_oauth_cookie_secret: '{{ lookup("bitwarden", "cookie-secret", field="secret") }}'
+shlink_oauth_client_id: '{{ lookup("bitwarden", "shlink/oauth", field="client-id") }}'
+shlink_oauth_client_secret: '{{ lookup("bitwarden", "shlink/oauth", field="secret") }}'
+
+# Restic Backups
+restic_user_groups: ['dockremap', 'docker']
+restic_backups:
+  - name: 'hackmd-db'
+    tags: ['pgdumpdir']
+    path: '/docker/hackmd/db/backup'
+    after: 'dump-hackmd-db.service'
+    frequency: 'daily'
+    timeout: 120
+
+  - name: 'wekan-db'
+    tags: ['mongodump']
+    path: '/docker/wekan-db/backup'
+    after: 'dump-wekan-db.service'
+    frequency: 'daily'
+    timeout: 120
+
+  - name: 'shlink-db'
+    path: '/docker/shlink/db/backup'
+    tags: ['pgdumpdir']
+    after: 'dump-shlink-db.service'
+    frequency: 'daily'
+
+
+# Open Nginx Ports
+open_ports_default_comment: 'Nginx'
+open_ports_default_chain: 'SERVICES'
+open_ports_list:
+  - { port: 80  }
+  - { port: 443 }
+
+# Nginx SSL Proxy configuration
+nginx_sites:
+  shlink_http:
+    - listen 80
+    - server_name {{ shlink_domain | mandatory }}
+    - return 301 https://$host$request_uri
+
+  shlink_ssl:
+    - listen 443 ssl
+    - server_name {{ shlink_domain | mandatory }}
+
+    - ssl_certificate     /certs/origin.crt
+    - ssl_certificate_key /certs/origin.key
+
+    - location / {
+        proxy_pass http://127.0.0.1:{{ shlink_app_cont_port }}/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+      }
+
+  shlink_admin_http:
+    - listen 80
+    - server_name {{ shlink_admin_domain | mandatory }}
+    - return 301 https://$host$request_uri
+
+  shlink_admin_ssl:
+    - listen 443 ssl
+    - server_name {{ shlink_admin_domain | mandatory }}
+
+    - ssl_certificate     /certs/origin.crt
+    - ssl_certificate_key /certs/origin.key
+
+    - location / {
+        proxy_pass http://127.0.0.1:{{ shlink_oauth_cont_port }}/;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+      }

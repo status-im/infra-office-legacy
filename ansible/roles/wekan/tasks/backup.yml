@@ -1,0 +1,14 @@
+---
+- name: 'Create timer for MongoDB backup: {{ wekan_db_backup_name }}'
+  include_role: name=systemd-timer
+  vars:
+    systemd_timer_name: '{{ wekan_db_backup_name }}'
+    systemd_timer_description: 'MondoDB backup script'
+    systemd_timer_user: '{{ wekan_db_backup_user }}'
+    systemd_timer_frequency: '{{ wekan_db_backup_interval }}'
+    systemd_timer_timeout_sec: '{{ wekan_db_backup_timeout }}'
+    systemd_timer_after_extra: 'docker.service'
+    systemd_timer_start_on_creation: false
+    systemd_timer_script_path: '/usr/bin/docker'
+    systemd_timer_script_args: |
+      exec {{ wekan_db_cont_name }} mongodump -d wekan -o /backup/

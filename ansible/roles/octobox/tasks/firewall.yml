@@ -1,0 +1,14 @@
+---
+- name: Enable access to container
+  iptables:
+    comment: '{{ octobox_service_name }}'
+    chain: INPUT
+    jump: ACCEPT
+    source: '0.0.0.0/0'
+    protocol: 'tcp'
+    destination_port: '{{ item | string }}'
+  with_items:
+    - 80
+    - 443
+  notify:
+    - Save iptables rules

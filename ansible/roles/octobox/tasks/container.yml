@@ -1,0 +1,41 @@
+---
+- name: 'Create service directory'
+  file:
+    path: '{{ octobox_service_path }}'
+    owner: 'dockremap'
+    group: 'docker'
+    state: 'directory'
+    recurse: true
+
+- name: 'Create cache directory'
+  file:
+    path: '{{ octobox_cache_cont_vol }}'
+    state: 'directory'
+    owner: 'dockremap'
+    group: 'docker'
+    recurse: true
+
+- name: 'Create database directory'
+  file:
+    path: '{{ octobox_db_cont_vol }}/data'
+    owner: '{{ octobox_db_host_uid }}'
+    group: 'dockremap'
+    state: 'directory'
+    recurse: true
+
+- name: Create compose file
+  template:
+    src: 'docker-compose.yml.j2'
+    dest: '{{ octobox_compose_file }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640
+
+- name: Create containers
+  docker_compose:
+    project_src: '{{ octobox_service_path }}'
+    state: '{{ compose_state }}'
+    restarted: '{{ compose_restart }}'
+    recreate: '{{ compose_recreate }}'
+    pull: true
+  register: octobox_container

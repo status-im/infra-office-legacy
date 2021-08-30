@@ -1,0 +1,51 @@
+---
+version: '3.7'
+services:
+  app:
+    container_name: '{{ octobox_app_cont_name }}'
+    image: '{{ octobox_app_cont_image }}'
+    restart: always
+    ports:
+      - '{{ octobox_app_cont_port }}:{{ octobox_app_cont_port }}'
+    environment:
+      RAILS_ENV: 'production'
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      MINIMUM_REFRESH_INTERVAL: '10'
+      SECRET_KEY_BASE: '{{ octobox_secret_key_base }}'
+      GITHUB_CLIENT_ID: '{{ octobox_oauth_client_id }}'
+      GITHUB_CLIENT_SECRET: '{{ octobox_oauth_secret }}'
+      OCTOBOX_DATABASE_NAME: '{{ octobox_db_name }}'
+      OCTOBOX_DATABASE_USERNAME: '{{ octobox_db_user }}'
+      OCTOBOX_DATABASE_PASSWORD: '{{ octobox_db_pass }}'
+      OCTOBOX_DATABASE_HOST: 'db'
+      REDIS_URL: 'redis://cache'
+    depends_on:
+      - db
+      - cache
+
+  cache:
+    container_name: '{{ octobox_cache_cont_name }}'
+    image: '{{ octobox_cache_cont_image }}'
+    restart: always
+    # docker-entrypoint.sh tries to chown /data which will not work
+    entrypoint: redis-server
+    volumes:
+      - '{{ octobox_cache_cont_vol }}:/data'
+
+  db:
+    container_name: '{{ octobox_db_cont_name }}'
+    image: '{{ octobox_db_cont_image }}'
+    restart: always
+    user: root
+    environment:
+      POSTGRES_DB: '{{ octobox_db_name }}'
+      POSTGRES_USER: '{{ octobox_db_user }}'
+      POSTGRES_PASSWORD: '{{ octobox_db_pass }}'
+      # This fixes chmod errors on DB startup due to volume + userns-remap
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+    tmpfs:
+      - '/run/postgresql:size=512K'
+      - '/tmp:size=256K'
+    volumes:
+      - '{{ octobox_db_cont_vol }}/data:/var/lib/postgresql/data'

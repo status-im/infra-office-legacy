@@ -1,0 +1,31 @@
+---
+- name: Configure nginx proxy for Octobox
+  include_role:
+    name: nginx
+  vars:
+    nginx_configs:
+      octobox_rate_limiting:
+        # Limit requests to 1 per minute based on IP
+        - limit_req_zone $binary_remote_addr zone=octobox_by_ip:20m rate=20r/m
+    nginx_sites:
+      octobox_http:
+        - listen 80
+        - server_name {{ octobox_domain }}
+        - return 302 https://$host$request_uri
+      octobox_https:
+        - listen 443 ssl http2
+        - server_name {{ octobox_domain }}
+    
+        - ssl_certificate     /certs/origin.crt
+        - ssl_certificate_key /certs/origin.key
+    
+        - location / {
+            limit_req zone=octobox_by_ip burst=30 nodelay;
+            proxy_set_header Host $proxy_host;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_read_timeout 300s;
+            proxy_connect_timeout 75s;
+            proxy_pass http://localhost:{{ octobox_app_cont_port }};
+          }

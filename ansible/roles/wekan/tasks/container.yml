@@ -1,0 +1,30 @@
+---
+- name: Create Wekan container
+  docker_container:
+    name: '{{ wekan_cont_name }}'
+    image: '{{ wekan_cont_image }}'
+    pull: true
+    restart_policy: always
+    state: '{{ cont_state }}'
+    recreate: '{{ cont_recreate }}'
+    restart: '{{ cont_restart }}'
+    links:
+      - '{{ wekan_db_cont_name }}:database'
+    ports:
+      - '{{ wekan_cont_port }}:{{ wekan_cont_port }}'
+    env:
+      PORT: '{{ wekan_cont_port | string }}'
+      WITH_API: 'true'
+      ROOT_URL: 'https://{{ wekan_domain }}'
+      MONGO_URL: 'mongodb://database:{{ wekan_db_cont_port }}/wekan'
+      BROWSER_POLICY_ENABLED: 'true'
+      # Mail
+      MAIL_URL: '{{ wekan_smtp_url }}'
+      MAIL_FROM: '{{ wekan_smtp_from }}'
+      # OAuth2
+      #OAUTH2_CLIENT_ID: '{{ wekan_oauth_client_id }}'
+      #OAUTH2_SECRET: '{{ wekan_oauth_secret }}'
+      #OAUTH2_SERVER_URL: 'https://accounts.google.com'
+      #OAUTH2_AUTH_ENDPOINT: '/signin/oauth' 
+      #OAUTH2_USERINFO_ENDPOINT: '/o/oauth2/tokeninfo' 
+      #OAUTH2_TOKEN_ENDPOINT: '/o/oauth2/token'
