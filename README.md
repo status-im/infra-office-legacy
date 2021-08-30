@@ -7,10 +7,12 @@ This repo configures infrastructure for cloud office services.
 | Description             | Address                     |
 |-------------------------|-----------------------------|
 | Keycloak Authentication | https://keycloak.status.im/ |
+| NextCloud               | https://cloud.status.im/    |
 
 # Services
 
 * [keycloak](./ansible/roles/keycloak) - Identity and Access Management
+* [nextcloud](ansible/roles/nextcloud) - Productivity platform
 
 # Repo Usage
 

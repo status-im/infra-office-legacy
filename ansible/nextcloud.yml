@@ -1,0 +1,21 @@
+---
+- name: Verify Ansible versions
+  hosts: all
+  tags: always
+  become: false
+  run_once: true
+  gather_facts: false
+  tasks:
+    - local_action: command ./versioncheck.py
+      changed_when: false
+
+- name: Configure NextCloud
+  hosts: nextcloud
+  roles:
+    - { role: swap-file,      tags: swap-file      }
+    - { role: open-ports,     tags: open-ports     }
+    - { role: origin-certs,   tags: origin-certs   }
+    - { role: nextcloud,      tags: nextcloud      }
+    - { role: restic-backups, tags: restic-backups }
+    - { role: nginx,          tags: nginx          }
+    - { role: threatstack,    tags: threatstack    }

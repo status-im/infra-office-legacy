@@ -1,0 +1,52 @@
+---
+# Necessary for Restic backups
+- name: Create NextCloud group
+  group:
+    name: 'nextcloud'
+    gid: '{{ nextcloud_app_host_uid }}'
+
+- name: Create directory for webserver
+  file:
+    path:  '{{ item.p | mandatory }}'
+    owner: '{{ item.get("o", "dockremap") }}'
+    group: '{{ item.get("g", "dockremap") }}'
+    mode:  '{{ item.get("m", "0750") }}'
+    state: 'directory'
+  with_items:
+    - { p: '{{ nextcloud_service_path }}',       g: 'docker' }
+    - { p: '{{ nextcloud_app_cont_vol }}/data',  o: '{{ nextcloud_app_host_uid }}',  g: 'nextcloud' }
+    - { p: '{{ nextcloud_db_cont_vol }}/data',   o: '{{ nextcloud_db_host_uid }}',   g: 'docker', m: '0777' }
+    - { p: '{{ nextcloud_docs_cont_vol }}/conf', o: '{{ nextcloud_docs_host_uid }}', g: 'docker', m: '0755' }
+
+- name: Create NextCloud logging config
+  template:
+    src: 'logs.config.php.j2'
+    dest: '{{ nextcloud_app_cont_vol }}/logs.config.php'
+    owner: '{{ nextcloud_app_host_uid }}'
+    group: 'dockremap'
+    mode: 0644
+
+- name: Create Collabora config file
+  template:
+    src: 'loolwsd.xml.j2'
+    dest: '{{ nextcloud_docs_cont_vol }}/conf/loolwsd.xml'
+    owner: '{{ nextcloud_docs_host_uid }}'
+    group: 'docker'
+    mode: 0644
+  register: collabora_conf
+
+- name: Create Database env file
+  template:
+    src: 'db.env.j2'
+    dest: '{{ nextcloud_service_path }}/db.env'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640
+
+- name: Create configuration file
+  template:
+    src: 'app.env.j2'
+    dest: '{{ nextcloud_service_path }}/app.env'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640

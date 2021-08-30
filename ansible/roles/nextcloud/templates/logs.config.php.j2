@@ -1,0 +1,6 @@
+<?php
+$CONFIG = array (
+  'log_type' => 'file',
+  'logfile' => getenv('NEXTCLOUD_LOG_FILE') ?: 'nextcloud.log',
+  'loglevel' => (int) getenv('NEXTCLOUD_LOG_LEVEL') ?: 1,
+);

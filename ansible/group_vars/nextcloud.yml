@@ -1,0 +1,91 @@
+---
+# Just in case
+swap_file_size_mb: 4096
+
+# NextCloud
+nextcloud_domain: 'cloud.status.im'
+nextcloud_docs_domain: 'collabora.status.im'
+# Admin
+nextcloud_admin_password: '{{lookup("passwordstore", "services/nextcloud/admin-pass")}}'
+# Collabora
+nextcloud_docs_admin_pass: '{{ nextcloud_admin_password }}'
+nextcloud_docs_cont_port: 9980
+# SMTP
+nextcloud_smtp_enabled: true
+nextcloud_smtp_port: 587
+nextcloud_smtp_host: 'smtp.mailgun.org'
+nextcloud_smtp_user: '{{lookup("bitwarden", "MailGun", field="smtp-user")}}'
+nextcloud_smtp_pass: '{{lookup("bitwarden", "MailGun", field="smtp-pass")}}'
+nextcloud_smtp_method: 'tls'
+nextcloud_smtp_domain: 'mgun.status.im'
+nextcloud_smtp_from: 'nextcloud'
+
+# Restic Backups
+restic_user_groups: ['docker', 'dockremap', 'nextcloud']
+restic_backups:
+  - name: 'nextcloud-db'
+    tags: ['pgdumpdir']
+    path: '/docker/nextcloud/db/backup'
+    after: 'dump-nextcloud-db.service'
+    frequency: 'daily'
+    timeout: 300
+
+  - name: 'nextcloud-data'
+    tags: ['files']
+    path: '/docker/nextcloud/app/data'
+    excludes: ['spacedeck.nexe.bin']
+    frequency: 'daily'
+    timeout: 1800
+
+# Open Nginx Ports
+open_ports_default_comment: 'NextCloud'
+open_ports_default_chain: 'SERVICES'
+open_ports_list:
+  - { port: 80  }
+  - { port: 443 }
+
+# Nginx proxy
+nginx_sites:
+  nextcloud_http:
+    - listen 80
+    - server_name {{ nextcloud_domain }}
+    - return 302 https://$server_name$request_uri
+  nextcloud_https:
+    - listen 443 ssl
+    - server_name {{ nextcloud_domain }}
+
+    - ssl_certificate     /certs/status.im/origin.crt
+    - ssl_certificate_key /certs/status.im/origin.key
+
+    - | # config to enable HSTS(HTTP Strict Transport Security)
+      add_header Strict-Transport-Security "max-age=15552000; includeSubDomains";
+
+    - location / {
+        proxy_pass http://localhost:{{ nextcloud_app_cont_port }}/;
+      }
+
+  collabora_http:
+    - listen 80
+    - server_name {{ nextcloud_docs_domain }}
+    - return 302 https://$server_name$request_uri
+  collabora_https:
+    - listen 443 ssl
+    - server_name {{ nextcloud_docs_domain }}
+
+    - ssl_certificate     /certs/status.im/origin.crt
+    - ssl_certificate_key /certs/status.im/origin.key
+
+      # websockets
+    - location /lool {
+          proxy_pass http://localhost:{{ nextcloud_docs_cont_port }};
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "Upgrade";
+          proxy_set_header Host $http_host;
+          proxy_read_timeout 36000s;
+      }
+
+    - location / {
+          proxy_pass http://localhost:{{ nextcloud_docs_cont_port }};
+          proxy_set_header Host $http_host;
+      }
+

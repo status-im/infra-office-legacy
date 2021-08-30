@@ -2,13 +2,21 @@
 # For emergency use when Consul fails
 [all]
 node-01.do-ams3.keycloak.office hostname=node-01.do-ams3.keycloak.office ansible_host=206.189.241.168 env=keycloak stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.keycloak.office.statusim.net
+node-01.do-ams3.nextcloud.office hostname=node-01.do-ams3.nextcloud.office ansible_host=64.225.82.112 env=nextcloud stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.nextcloud.office.statusim.net
 
 [do-ams3]
 node-01.do-ams3.keycloak.office
+node-01.do-ams3.nextcloud.office
 
 [keycloak]
 node-01.do-ams3.keycloak.office
 
 [keycloak.office]
 node-01.do-ams3.keycloak.office
+
+[nextcloud]
+node-01.do-ams3.nextcloud.office
+
+[nextcloud.office]
+node-01.do-ams3.nextcloud.office
 

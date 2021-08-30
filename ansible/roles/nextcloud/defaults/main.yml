@@ -1,0 +1,71 @@
+---
+nextcloud_service_name: 'nextcloud'
+nextcloud_service_path: '/docker/{{ nextcloud_service_name }}'
+nextcloud_compose_file: '{{ nextcloud_service_path }}/docker-compose.yml'
+
+# Proxy
+#nextcloud_domain: ~
+# Admin
+nextcloud_admin_username: 'admin'
+nextcloud_admin_password: 'changeMeIfYouCare'
+
+# App --------------------------------------------------------------------------
+nextcloud_app_cont_name: '{{ nextcloud_service_name }}-app'
+nextcloud_app_cont_vol:  '{{ nextcloud_service_path }}/app'
+nextcloud_app_cont_tag: '22.1.0-apache'
+nextcloud_app_cont_image: 'nextcloud:{{ nextcloud_app_cont_tag }}'
+nextcloud_app_cont_port: 9000
+nextcloud_app_cont_uid: 33
+nextcloud_app_host_uid: '{{ 100000 + nextcloud_app_cont_uid | int }}'
+nextcloud_app_log_levels: { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, FATAL: 4 }
+nextcloud_app_log_level: 'INFO'
+# Docs -------------------------------------------------------------------------
+nextcloud_docs_cont_name: '{{ nextcloud_service_name }}-docs'
+nextcloud_docs_cont_vol:  '{{ nextcloud_service_path }}/docs'
+nextcloud_docs_cont_verison: '6.4.10.6'
+nextcloud_docs_cont_image: 'collabora/code:{{ nextcloud_docs_cont_verison }}'
+nextcloud_docs_cont_port: 9980
+nextcloud_docs_cont_uid: 104
+nextcloud_docs_host_uid: '{{ 100000 + nextcloud_docs_cont_uid | int }}'
+nextcloud_docs_admin_user: 'admin'
+nextcloud_docs_admin_pass: 'changeMeIfYouCare'
+nextcloud_docs_log_level: 'information'
+# Cache ------------------------------------------------------------------------
+nextcloud_cache_cont_name: '{{ nextcloud_service_name }}-cache'
+nextcloud_cache_cont_vol:  '{{ nextcloud_service_path }}/cache'
+nextcloud_cache_cont_tag: '6.2.4-alpine'
+nextcloud_cache_cont_image: 'redis:{{ nextcloud_cache_cont_tag }}'
+nextcloud_cache_cont_port: 6379
+nextcloud_cache_pass: 'changeMeIfYouCare'
+# DB ---------------------------------------------------------------------------
+nextcloud_db_cont_name: '{{ nextcloud_service_name }}-db'
+nextcloud_db_cont_vol:  '{{ nextcloud_service_path }}/db'
+nextcloud_db_cont_tag: '13.3-alpine'
+nextcloud_db_cont_image: 'postgres:{{ nextcloud_db_cont_tag }}'
+nextcloud_db_cont_port: 5432
+nextcloud_db_cont_uid: 70
+nextcloud_db_host_uid: '{{ 100000 + nextcloud_db_cont_uid | int }}'
+nextcloud_db_name: 'nextcloud'
+nextcloud_db_user: 'nextcloud'
+nextcloud_db_pass: 'changeMeIfYouCare'
+
+# Backups
+nextcloud_db_backup_service_name: 'dump-{{ nextcloud_service_name }}-db'
+nextcloud_db_backup_user: 'root'
+nextcloud_db_backup_frequency: 'daily'
+nextcloud_db_backup_timeout: 120
+
+# EMail
+nextcloud_smtp_enabled: false
+#nextcloud_smtp_port: 587
+#nextcloud_smtp_host: 'smtp.example.org'
+#nextcloud_smtp_user: 'smtp-login-user'
+#nextcloud_smtp_pass: 'super-secret-password'
+#nextcloud_smtp_method: 'tls'
+#nextcloud_smtp_domain: 'example.org'
+#nextcloud_smtp_from: 'nextcloud'
+
+# general container management
+compose_recreate: 'smart'
+compose_state: 'present'
+compose_restart: false
