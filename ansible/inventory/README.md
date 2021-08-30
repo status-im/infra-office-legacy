@@ -10,7 +10,7 @@ To use simply provide the file for the given stage using the `-i` argument.
 
 For example, if you want to run Ansible on mailservers of `eth.test` fleet while Consul is unavailable do:
 ```bash
-ansible-playbook ansible/main.yml -i ansible/inventory/office -l mail
+ansible-playbook ansible/main.yml -i ansible/inventory/beta -l mail
 ```
 
 # Terraform Backup
