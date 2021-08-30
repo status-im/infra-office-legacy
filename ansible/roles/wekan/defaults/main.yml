@@ -1,30 +1,28 @@
 ---
+wekan_service_name: 'wekan'
+wekan_service_path: '/docker/{{ wekan_service_name }}'
+wekan_compose_file: '{{ wekan_service_path }}/docker-compose.yml'
+
 wekan_domain: 'wekan.example.org'
 
-wekan_cont_tag: 'v5.28'
-wekan_cont_image: 'wekanteam/wekan:{{ wekan_cont_tag }}'
-wekan_cont_name: 'wekan'
-wekan_cont_vol: '/docker/{{ wekan_cont_name }}'
-wekan_cont_port: 8280
-
-wekan_cont_state: started
-wekan_cont_recreate: false
-wekan_cont_restart: false
-
-# All Wekan data is stored in MongoDB. For backup and restore, see:
-# https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data
-wekan_db_cont_name: '{{ wekan_cont_name }}-db'
+# App --------------------------------------------------------------------------
+wekan_app_cont_name: '{{ wekan_service_name }}-app'
+wekan_app_cont_tag: 'v5.28'
+wekan_app_cont_image: 'wekanteam/wekan:{{ wekan_app_cont_tag }}'
+wekan_app_cont_port: 8280
+# App --------------------------------------------------------------------------
+wekan_db_cont_name: '{{ wekan_service_name }}-db'
+wekan_db_cont_vol: '{{ wekan_service_path }}/db'
 wekan_db_cont_image: 'mongo:3.2.21'
 wekan_db_cont_port: 27017
-wekan_db_cont_vol: '/docker/{{ wekan_db_cont_name }}'
-
-# Backups
+# Backups - https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data
 wekan_db_backup_name: 'dump-{{ wekan_db_cont_name }}'
 wekan_db_backup_user: 'root'
 wekan_db_backup_interval: 'daily'
 wekan_db_backup_timeout: 30
 
 # Oauth
+wekan_oauth_enabled: false
 #wekan_oauth_client_id: ~
 #wekan_oauth_secret: ~
 
@@ -33,5 +31,9 @@ wekan_db_backup_timeout: 30
 #wekan_smtp_host: 'smtp.example.org'
 #wekan_smtp_user: 'smtp-secret-user'
 #wekan_smtp_pass: 'smtp-secret-pass'
-#wekan_smtp_from: 'Wekan Board <wekan@example.im>'
-wekan_smtp_url: 'smtp://{{ wekan_smtp_user | mandatory }}:{{ wekan_smtp_pass | mandatory }}@{{ wekan_smtp_host | mandatory }}:{{ wekan_smtp_port | mandatory }}/'
+#wekan_smtp_from: 'Wekan Board <wekan@example.org>'
+
+# general container management
+compose_recreate: 'smart'
+compose_state: 'present'
+compose_restart: false

@@ -2,14 +2,14 @@
 - name: Create Consul service definition
   include_role: name=consul-service
   vars:
-    consul_config_name: '{{ wekan_cont_name }}'
+    consul_config_name: '{{ wekan_app_cont_name }}'
     consul_services:
-      - name: '{{ wekan_cont_name }}'
+      - name: '{{ wekan_app_cont_name }}'
         tags: ['wekan', 'misc']
         # we advertise the port with basic auth
-        port: '{{ wekan_cont_port }}'
+        port: '{{ wekan_app_cont_port }}'
         checks:
           - id: wekan-status
             name: Wekan Healthcheck
             type: http
-            http: 'http://localhost:{{ wekan_cont_port }}/'
+            http: 'http://localhost:{{ wekan_app_cont_port }}/'

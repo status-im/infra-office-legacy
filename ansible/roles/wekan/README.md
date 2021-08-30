@@ -19,6 +19,7 @@ wekan_smtp_user: 'smtp-secret-user'
 wekan_smtp_pass: 'smtp-secret-pass'
 wekan_smtp_from: 'Wekan Board <wekan@example.im>'
 ```
+There is also optional OAuth config.
 
 # Backups
 

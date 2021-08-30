@@ -1,0 +1,42 @@
+
+---
+version: '3.7'
+services:
+  app:
+    container_name: '{{ wekan_app_cont_name }}'
+    image: '{{ wekan_app_cont_image }}'
+    restart: always
+    ports:
+      - '{{ wekan_app_cont_port }}:{{ wekan_app_cont_port }}'
+    environment:
+      WITH_API: 'true'
+      PORT: '{{ wekan_app_cont_port | string }}'
+      ROOT_URL: 'https://{{ wekan_domain }}'
+      MONGO_URL: 'mongodb://db:{{ wekan_db_cont_port }}/wekan'
+      BROWSER_POLICY_ENABLED: 'true'
+      MAIL_URL: 'smtp://{{ wekan_smtp_user | mandatory }}:{{ wekan_smtp_pass | mandatory }}@{{ wekan_smtp_host | mandatory }}:{{ wekan_smtp_port | mandatory }}/'
+      MAIL_FROM: '{{ wekan_smtp_from }}'
+{% if wekan_oauth_enabled %}
+      OAUTH2_CLIENT_ID: '{{ wekan_oauth_client_id }}'
+      OAUTH2_SECRET: '{{ wekan_oauth_secret }}'
+      OAUTH2_SERVER_URL: 'https://accounts.google.com'
+      OAUTH2_AUTH_ENDPOINT: '/signin/oauth' 
+      OAUTH2_USERINFO_ENDPOINT: '/o/oauth2/tokeninfo' 
+      OAUTH2_TOKEN_ENDPOINT: '/o/oauth2/token'
+{% endif %}
+    depends_on:
+      - db
+
+  db:
+    container_name: '{{ wekan_db_cont_name }}'
+    image: '{{ wekan_db_cont_image }}'
+    restart: always
+    entrypoint: mongod
+    command: |
+      --smallfiles
+      --oplogSize=128
+    ports:
+      - '{{ wekan_db_cont_port }}:{{ wekan_db_cont_port }}'
+    volumes:
+      - '{{ wekan_db_cont_vol }}/data:/data/db'
+      - '{{ wekan_db_cont_vol }}/backup:/backup'
