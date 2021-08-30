@@ -1,0 +1,20 @@
+---
+- name: Verify Ansible versions
+  hosts: all
+  tags: always
+  become: false
+  run_once: true
+  gather_facts: false
+  tasks:
+    - local_action: command ./versioncheck.py
+      changed_when: false
+
+- name: Configure Keycloak
+  hosts: keycloak
+  roles:
+    - { role: origin-certs,   tags: origin-certs }
+    - { role: open-ports,     tags: open-ports }
+    - { role: swap-file,      tags: swap-file }
+    - { role: keycloak,       tags: keycloak }
+    - { role: nginx,          tags: nginx }
+    - { role: threatstack,    tags: threatstack }
