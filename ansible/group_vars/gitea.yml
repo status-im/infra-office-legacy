@@ -1,0 +1,73 @@
+---
+# CloudFlare Origin certificates
+origin_certs:
+  - domain: 'status.im'
+    crt: '{{lookup("bitwarden", "CloudFlare/status.im", file="origin.crt")}}'
+    key: '{{lookup("bitwarden", "CloudFlare/status.im", file="origin.key")}}'
+    default: true
+
+# Gitea
+gitea_app_name: 'Status.im Repos'
+gitea_app_web_domain: 'repos.status.im'
+gitea_app_ssh_domain: 'git.status.im'
+gitea_app_ssh_port: 22
+gitea_app_cont_web_port: 3000
+gitea_app_secret_key: '{{lookup("passwordstore", "services/gitea/secret-key")}}'
+gitea_app_security_token: '{{lookup("passwordstore", "services/gitea/security-token")}}'
+gitea_app_jwt_secret: '{{lookup("passwordstore", "services/gitea/jwt-token")}}'
+# DB
+gitea_db_pass: '{{lookup("passwordstore", "services/gitea/db-pass")}}'
+# Admin
+gitea_app_admin_user: '{{lookup("passwordstore", "services/gitea/admin/user")}}'
+gitea_app_admin_pass: '{{lookup("passwordstore", "services/gitea/admin/pass")}}'
+gitea_app_admin_email: 'devops@status.im'
+
+# GitHub Mirroring
+gitea_mirrors_orgs: ['dap-ps', 'embarklabs', 'status-im']
+gitea_mirrors_api_token: '{{ gitea_api_token }}' # requires gitea role to run
+gitea_mirrors_gh_api_token: '{{lookup("passwordstore", "services/gitea/gh/token")}}'
+# Some repos are just too big
+gitea_mirrors_exclude_regex: '(chromium|webkit|qt5)'
+
+# Open Nginx Ports
+open_ports_default_comment: 'Gitea'
+open_ports_default_chain: 'SERVICES'
+open_ports_list:
+  - { port: 80  }
+  - { port: 443 }
+  # DigitalOcean Load Balancer
+  - { port: 2222, comment: 'Gitea SSH' }
+
+# Restic Backups
+restic_user_groups: ['dockremap', 'docker']
+restic_backups:
+  - name: 'gitea-db'
+    tags: ['pgdumpdir']
+    path: '{{ gitea_db_cont_vol }}/backup'
+    after: '{{ gitea_db_backup_service_name }}.service'
+    frequency: '01:00'
+    timeout: 120
+
+  - name: 'gitea-repos'
+    tags: ['gitbare']
+    path: '{{ gitea_app_cont_vol }}/data/git'
+    excludes: ['.ssh']
+    frequency: '02:00'
+    timeout: 1800
+
+# Nginx proxy
+nginx_sites:
+  gitea_http:
+    - listen 80
+    - server_name {{ gitea_app_web_domain }}
+    - return 302 https://$server_name$request_uri
+  gitea_https:
+    - listen 443 ssl
+    - server_name {{ gitea_app_web_domain }}
+
+    - ssl_certificate     /certs/origin.crt
+    - ssl_certificate_key /certs/origin.key
+
+    - location / {
+        proxy_pass http://localhost:{{ gitea_app_cont_web_port }}/;
+      }

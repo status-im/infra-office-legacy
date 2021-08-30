@@ -8,10 +8,12 @@ This repo configures infrastructure for cloud office services.
 |-------------------------|-----------------------------|
 | Keycloak Authentication | https://keycloak.status.im/ |
 | NextCloud               | https://cloud.status.im/    |
+| Gitea Git Frontend      | https://repos.status.im/    |
 
 # Services
 
-* [keycloak](./ansible/roles/keycloak) - Identity and Access Management
+* [gitea](ansible/roles/gitea) - [Gitea](https://gitea.io/) Git Web Frontent
+* [keycloak](ansible/roles/keycloak) - Identity and Access Management
 * [nextcloud](ansible/roles/nextcloud) - Productivity platform
 
 # Repo Usage

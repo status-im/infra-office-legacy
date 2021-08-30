@@ -1,0 +1,21 @@
+---
+- name: Verify Ansible versions
+  hosts: all
+  tags: always
+  become: false
+  run_once: true
+  gather_facts: false
+  tasks:
+    - local_action: command ./versioncheck.py
+      changed_when: false
+
+- name: Configure Proxying host
+  hosts: gitea
+  roles:
+    - { role: origin-certs,   tags: origin-certs }
+    - { role: threatstack,    tags: threatstack }
+    - { role: gitea,          tags: gitea }
+    - { role: gitea-mirrors,  tags: gitea-mirrors }
+    - { role: restic-backups, tags: restic-backups }
+    - { role: nginx,          tags: nginx }
+    - { role: open-ports,     tags: open-ports }
