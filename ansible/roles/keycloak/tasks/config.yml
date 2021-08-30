@@ -1,0 +1,34 @@
+---
+- name: Create service directory
+  file:
+    path: '{{ keycloak_service_path }}'
+    state: 'directory'
+    owner: 'dockremap'
+    group: 'docker'
+
+- name: Create directory for DB data
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ keycloak_db_host_uid }}'
+    group: dockremap
+    recurse: true
+  with_items:
+    - '{{ keycloak_db_cont_vol }}/data'
+    - '{{ keycloak_db_cont_vol }}/backup'
+
+- name: Create Database env file
+  template:
+    src: 'db.env.j2'
+    dest: '{{ keycloak_service_path }}/db.env'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640
+
+- name: Create configuration file
+  template:
+    src: 'app.env.j2'
+    dest: '{{ keycloak_service_path }}/app.env'
+    owner: 'dockremap'
+    group: 'docker'
+    mode: 0640

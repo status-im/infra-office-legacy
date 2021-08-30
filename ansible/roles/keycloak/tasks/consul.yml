@@ -1,0 +1,15 @@
+---
+- name: Consul service definition
+  include_role: name=consul-service
+  vars:
+    consul_config_name: '{{ keycloak_service_name }}'
+    consul_services:
+      - id: '{{ keycloak_service_name }}'
+        name: '{{ keycloak_service_name }}'
+        port: '{{ keycloak_app_cont_public_port }}'
+        address: 'localhost'
+        tags: ['{{ env }}.{{ stage }}', 'keycloak', 'oauth']
+        checks:
+          - id: '{{ keycloak_service_name }}-health'
+            type: http
+            http: 'http://localhost:{{ keycloak_app_cont_public_port }}/auth/realms/master'
