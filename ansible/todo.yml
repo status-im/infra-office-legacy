@@ -12,13 +12,13 @@
 - name: Configure Wekan, Octobox, HackMD
   hosts: todo
   roles:
-    - { role: swap-file,          tags: swap-file }
-    - { role: open-ports,         tags: open-ports }
-    - { role: origin-certs,       tags: origin-certs }
-    - { role: hackmd,             tags: hackmd }
-    - { role: wekan,              tags: wekan }
-    - { role: octobox,            tags: octobox }
-    - { role: shlink,             tags: shlink }
-    - { role: nginx,              tags: nginx }
-    - { role: restic-backups,     tags: restic-backups }
-    - { role: threatstack,        tags: threatstack }
+    - { role: swap-file,      tags: swap-file }
+    - { role: open-ports,     tags: open-ports }
+    - { role: origin-certs,   tags: origin-certs }
+    - { role: hackmd,         tags: hackmd }
+    - { role: wekan,          tags: wekan }
+    - { role: octobox,        tags: octobox }
+    - { role: shlink,         tags: shlink }
+    - { role: nginx,          tags: nginx }
+    - { role: restic-backups, tags: restic-backups }
+    - { role: threatstack,    tags: threatstack }

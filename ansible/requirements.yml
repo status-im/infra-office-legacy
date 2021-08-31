@@ -31,7 +31,7 @@
 
 - name: restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: b182da34092cf48846cdbdd52f8559056e386a76
+  version: bcee9caa7d8de9379789585265719a9c6c61973a
   scm: git
 
 - name: infra-role-bootstrap-linux

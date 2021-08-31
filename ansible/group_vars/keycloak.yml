@@ -8,6 +8,16 @@ keycloak_admin_username: 'admin'
 keycloak_admin_password: '{{ lookup("passwordstore", "services/keycloak/admin-pass") }}'
 keycloak_app_cont_public_port: 8080
 
+# Restic Backups
+restic_user_groups: ['docker', 'dockremap']
+restic_backups:
+  - name: 'keycloak-db'
+    tags: ['pgdumpdir']
+    path: '/docker/keycloak/db/backup'
+    after: 'dump-keycloak-db.service'
+    frequency: 'daily'
+    timeout: 300
+
 # Open Nginx Ports
 open_ports_default_comment: 'Keycloak'
 open_ports_default_chain: 'SERVICES'
