@@ -48,7 +48,7 @@ restic_backups:
 
   - name: 'wekan-db'
     tags: ['mongodump']
-    path: '/docker/wekan-db/backup'
+    path: '/docker/wekan/db/backup'
     after: 'dump-wekan-db.service'
     frequency: 'daily'
     timeout: 120
