@@ -31,6 +31,12 @@ keycloak_db_pass: 'changeMeIfYouCare'
 keycloak_db_cont_uid: 70
 keycloak_db_host_uid: '{{ 100000 + keycloak_db_cont_uid | int }}'
 
+# Backup
+keycloak_db_backup_service_name: 'dump-{{ keycloak_service_name }}-db'
+keycloak_db_backup_frequency: 'daily'
+keycloak_db_backup_timeout: '600'
+keycloak_db_backup_user: 'root'
+
 # general container management
 compose_recreate: 'smart'
 compose_state: 'present'
