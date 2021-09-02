@@ -26,17 +26,17 @@
 
 - name: systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: 96176f6c871effb19ecb7f6a8eb81079d3b9efa1
+  version: cf1798b1eb49af97a62675fa865a89919d7e0bd1
   scm: git
 
 - name: restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: bcee9caa7d8de9379789585265719a9c6c61973a
+  version: b0debe383d45eac9e280dc3a143957b05fdc0c73
   scm: git
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: acc383c56588fc81de12214fb8b2a85e0841782d
+  version: 31dfd8becfbf47f4fc5a4b333ade20a540e8c83f
   scm: git
 
 - name: infra-role-wireguard

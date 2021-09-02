@@ -19,7 +19,7 @@ shlink_app_cont_port: 8080
 shlink_app_workers: 16
 # Web --------------------------------------------
 shlink_web_cont_name: '{{ shlink_service_name }}-web'
-shlink_web_cont_version: '2.6.2'
+shlink_web_cont_version: '3.2.0'
 shlink_web_cont_image: 'shlinkio/shlink-web-client:{{ shlink_web_cont_version }}'
 shlink_web_cont_vol: '{{ shlink_service_path }}/web'
 shlink_web_cont_port: 8090
