@@ -13,7 +13,7 @@ shlink_compose_file: '{{ shlink_service_path }}/docker-compose.yml'
 shlink_api_key_file: '{{ shlink_service_path }}/api-key'
 # App --------------------------------------------
 shlink_app_cont_name: '{{ shlink_service_name }}-app'
-shlink_app_cont_version: '2.4.1'
+shlink_app_cont_version: '2.8.1'
 shlink_app_cont_image: 'shlinkio/shlink:{{ shlink_app_cont_version }}'
 shlink_app_cont_port: 8080
 shlink_app_workers: 16
