@@ -15,7 +15,7 @@ keycloak_admin_password: 'changeMeIfYouCare'
 
 # App --------------------------------------------------------------------------
 keycloak_app_cont_name: '{{ keycloak_service_name }}-app'
-keycloak_app_cont_tag: '14.0.0'
+keycloak_app_cont_tag: '15.0.2'
 keycloak_app_cont_image: 'jboss/keycloak:{{ keycloak_app_cont_tag }}'
 keycloak_app_cont_public_port: 8080
 keycloak_app_cont_metrics_port: 9990
