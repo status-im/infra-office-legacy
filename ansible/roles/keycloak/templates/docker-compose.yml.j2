@@ -6,6 +6,8 @@ services:
     image: '{{ keycloak_app_cont_image }}'
     restart: 'always'
     env_file: '{{ keycloak_service_path }}/app.env'
+    command: |
+      -Dkeycloak.forceBackendUrlToFrontendUrl=true
     ports:
       - '{{ keycloak_app_cont_public_port }}:8080/tcp'
       - '{{ keycloak_app_cont_metrics_port }}:9990/tcp'

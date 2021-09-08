@@ -16,3 +16,12 @@ resource "cloudflare_record" "keycloak" {
   type    = "A"
   proxied = true
 }
+
+/* Domain for status-im Keycloak realm. */
+resource "cloudflare_record" "auth" {
+  zone_id = local.zones["status.im"]
+  value   = module.keycloak.public_ips[0]
+  name    = "auth"
+  type    = "A"
+  proxied = true
+}

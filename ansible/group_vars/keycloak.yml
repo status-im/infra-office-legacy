@@ -29,12 +29,12 @@ open_ports_list:
 nginx_sites:
   keycloak_http:
     - listen 80
-    - server_name {{ keycloak_domain | mandatory }}
+    - server_name {{ keycloak_domain | mandatory }} auth.status.im
     - return 301 https://$host$request_uri
 
   keycloak_ssl:
     - listen 443 ssl
-    - server_name {{ keycloak_domain | mandatory }}
+    - server_name {{ keycloak_domain | mandatory }} auth.status.im
 
     - ssl_certificate     /certs/origin.crt
     - ssl_certificate_key /certs/origin.key
