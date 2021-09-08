@@ -1,10 +1,5 @@
 ---
-# CloudFlare Origin certificates
-origin_certs:
-  - domain: 'status.im'
-    crt: '{{lookup("bitwarden", "CloudFlare/status.im", file="origin.crt")}}'
-    key: '{{lookup("bitwarden", "CloudFlare/status.im", file="origin.key")}}'
-    default: true
+swap_file_size_mb: 4096
 
 # Gitea
 gitea_app_name: 'Status.im Repos'

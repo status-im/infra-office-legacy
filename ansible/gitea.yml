@@ -12,6 +12,7 @@
 - name: Configure Proxying host
   hosts: gitea
   roles:
+    - { role: swap-file,      tags: swap-file }
     - { role: origin-certs,   tags: origin-certs }
     - { role: threatstack,    tags: threatstack }
     - { role: gitea,          tags: gitea }
