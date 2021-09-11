@@ -8,6 +8,9 @@ nextcloud_compose_file: '{{ nextcloud_service_path }}/docker-compose.yml'
 # Admin
 nextcloud_admin_username: 'admin'
 nextcloud_admin_password: 'changeMeIfYouCare'
+# Apps
+nextcloud_enabled_apps: []
+nextcloud_disabled_apps: []
 
 # App --------------------------------------------------------------------------
 nextcloud_app_cont_name: '{{ nextcloud_service_name }}-app'
