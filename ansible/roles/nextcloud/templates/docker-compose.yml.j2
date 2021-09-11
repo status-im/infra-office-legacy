@@ -54,6 +54,7 @@ services:
     # docker-entrypoint.sh tries to chown /data which will not work
     entrypoint: redis-server
     command: >
+      --port '{{ nextcloud_cache_cont_port }}'
       --requirepass '{{ nextcloud_cache_pass }}'
     ports:
       - '{{ nextcloud_cache_cont_port }}:{{ nextcloud_cache_cont_port }}'
@@ -72,6 +73,8 @@ services:
     env_file: '{{ nextcloud_service_path }}/db.env'
     ports:
       - '{{ nextcloud_db_cont_port }}:{{ nextcloud_db_cont_port }}/tcp'
+    command: |
+      -p {{ nextcloud_db_cont_port }}
     tmpfs:
       - '/run/postgresql:size=512K'
       - '/tmp:size=256K'
