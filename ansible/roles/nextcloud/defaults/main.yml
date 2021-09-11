@@ -11,6 +11,14 @@ nextcloud_admin_password: 'changeMeIfYouCare'
 # Apps
 nextcloud_enabled_apps: []
 nextcloud_disabled_apps: []
+# Oauth
+nextcloud_oauth_enabled: false
+#nextcloud_oauth_name: 'Keycloak'
+#nextcloud_oauth_style: 'keycloak'
+#nextcloud_oauth_url: 'https://keycloak.example.org/auth/realms/status-im/protocol'
+#nextcloud_oauth_id: 'super-secret-oauth-id'
+#nextcloud_oauth_secret: 'super-secret-oauth-secret'
+#nextcloud_oauth_scope: 'openid'
 
 # App --------------------------------------------------------------------------
 nextcloud_app_cont_name: '{{ nextcloud_service_name }}-app'

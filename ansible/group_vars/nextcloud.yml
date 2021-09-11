@@ -6,7 +6,7 @@ swap_file_size_mb: 4096
 nextcloud_domain: 'cloud.status.im'
 nextcloud_docs_domain: 'collabora.status.im'
 # Admin
-nextcloud_admin_password: '{{lookup("passwordstore", "services/nextcloud/admin-pass")}}'
+nextcloud_admin_password: '{{lookup("bitwarden", "nextcloud/admin")}}'
 # Apps
 nextcloud_enabled_apps:
   - appointments
@@ -23,6 +23,14 @@ nextcloud_enabled_apps:
   - twofactor_u2f
 nextcloud_disabled_apps:
   - tasks
+# OAuth
+nextcloud_oauth_enabled: true
+nextcloud_oauth_name: 'Keycloak'
+nextcloud_oauth_style: 'keycloak'
+nextcloud_oauth_url: 'https://auth.status.im/auth/realms/status-im/protocol/openid-connect'
+nextcloud_oauth_id: '{{ lookup("bitwarden", "nextcloud/oauth/keycloak", field="client-id") }}'
+nextcloud_oauth_secret: '{{ lookup("bitwarden", "nextcloud/oauth/keycloak", field="secret") }}'
+nextcloud_oauth_scope: 'openid'
 # Collabora
 nextcloud_docs_admin_pass: '{{ nextcloud_admin_password }}'
 nextcloud_docs_cont_port: 9980

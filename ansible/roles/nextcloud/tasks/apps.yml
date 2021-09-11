@@ -1,4 +1,9 @@
 ---
+- name: Add SocialLogin to enabled apps
+  set_fact:
+    nextcloud_enabled_apps: '{{ nextcloud_enabled_apps + ["sociallogin"] }}'
+  when: nextcloud_oauth_enabled
+
 - name: Check installed applications
   command: |
     docker exec -u {{ nextcloud_app_cont_uid }} \
