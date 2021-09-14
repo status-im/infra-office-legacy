@@ -84,6 +84,9 @@ nginx_sites:
     - | # config to enable HSTS(HTTP Strict Transport Security)
       add_header Strict-Transport-Security "max-age=15552000; includeSubDomains";
 
+      # Increase file upload limits to 20 MB
+    - client_max_body_size 20m
+
     - location / {
         proxy_pass http://localhost:{{ nextcloud_app_cont_port }}/;
       }
