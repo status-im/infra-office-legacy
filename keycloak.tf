@@ -12,7 +12,7 @@ module "keycloak" {
 resource "cloudflare_record" "keycloak" {
   zone_id = local.zones["status.im"]
   value   = module.keycloak.public_ips[0]
-  name    = "keycloak"
+  name    = "keycloak.infra"
   type    = "A"
   proxied = true
 }

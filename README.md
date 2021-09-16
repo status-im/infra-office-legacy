@@ -4,16 +4,17 @@ This repo configures infrastructure for cloud office services.
 
 # Endpoints
 
-| Description             | Address                       |
-|-------------------------|-------------------------------|
-| Keycloak Authentication | https://keycloak.status.im/   |
-| NextCloud               | https://cloud.status.im/      |
-| Gitea Git Frontend      | https://repos.status.im/      |
-| HackMD Notes            | https://notes.status.im/      |
-| Octobox GitHub Inbox    | https://gh.status.im/         |
-| Wekan Kanban Board      | https://boards.status.im/     |
-| URL Shortener           | https://link.status.im/       |
-| URL Shortener Admin     | https://admin-link.status.im/ |
+| Description              | Address                           |
+|--------------------------|-----------------------------------|
+| NextCloud                | https://cloud.status.im/          |
+| Gitea Git Frontend       | https://repos.status.im/          |
+| HackMD Notes             | https://notes.status.im/          |
+| Octobox GitHub Inbox     | https://gh.status.im/             |
+| Wekan Kanban Board       | https://boards.status.im/         |
+| Status.im Authentication | https://auth.status.im/           |
+| Keycloak Authentication  | https://keycloak.infra.status.im/ |
+| URL Shortener            | https://link.status.im/           |
+| URL Shortener Admin      | https://admin-link.status.im/     |
 
 # Services
 
