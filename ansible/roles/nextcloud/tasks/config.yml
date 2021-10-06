@@ -18,13 +18,16 @@
     - { p: '{{ nextcloud_db_cont_vol }}/data',   o: '{{ nextcloud_db_host_uid }}',   g: 'docker', m: '0777' }
     - { p: '{{ nextcloud_docs_cont_vol }}/conf', o: '{{ nextcloud_docs_host_uid }}', g: 'docker', m: '0755' }
 
-- name: Create NextCloud logging config
+- name: Create NextCloud extra config
   template:
-    src: 'logs.config.php.j2'
-    dest: '{{ nextcloud_app_cont_vol }}/logs.config.php'
+    src: '{{ item }}.j2'
+    dest: '{{ nextcloud_app_cont_vol }}/{{ item }}'
     owner: '{{ nextcloud_app_host_uid }}'
     group: 'dockremap'
     mode: 0644
+  with_items:
+    - 'general.config.php'
+    - 'logs.config.php'
 
 - name: Create Collabora config file
   template:
