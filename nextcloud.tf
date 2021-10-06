@@ -3,7 +3,7 @@ module "nextcloud" {
   host_count = 1
   env        = "nextcloud"
   group      = "nextcloud"
-  size       = "s-2vcpu-4gb"
+  size       = "s-4vcpu-8gb"
   domain     = var.domain
 
   open_tcp_ports = ["80", "443"]
