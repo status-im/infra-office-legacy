@@ -14,7 +14,7 @@ octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secre
 # App --------------------------------------------------------------------------
 octobox_app_cont_name: '{{ octobox_service_name }}-app'
 octobox_app_cont_vol: '{{ octobox_service_path }}/app'
-octobox_app_cont_digest: 'sha256:8aaf878e545efb87af747a480927de89bbb62cc3b80dca8e5119dd783e6af174'
+octobox_app_cont_digest: 'sha256:7bd1458ce6706b5326332f516fabef3dd07d470aa8dd09d616dc32a603bca8e8'
 octobox_app_cont_image: 'octoboxio/octobox@{{ octobox_app_cont_digest }}'
 octobox_app_cont_port: 3000
 # Database ---------------------------------------------------------------------
