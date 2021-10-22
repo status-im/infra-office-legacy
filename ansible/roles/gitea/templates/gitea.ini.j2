@@ -61,6 +61,8 @@ COLORIZE = false
 INSTALL_LOCK   = {{ gitea_app_install_lock }}
 SECRET_KEY     = {{ gitea_app_secret_key | mandatory }}
 INTERNAL_TOKEN = {{ gitea_app_security_token | mandatory }}
+# Accept X-Forwarded-For headers
+REVERSE_PROXY_TRUSTED_PROXIES = *
 
 [service]
 DISABLE_REGISTRATION = {{ gitea_app_disable_registration }}
