@@ -7,7 +7,7 @@ wekan_domain: 'wekan.example.org'
 
 # App --------------------------------------------------------------------------
 wekan_app_cont_name: '{{ wekan_service_name }}-app'
-wekan_app_cont_tag: 'v5.65'
+wekan_app_cont_tag: 'v5.83'
 wekan_app_cont_image: 'wekanteam/wekan:{{ wekan_app_cont_tag }}'
 wekan_app_cont_port: 8280
 # App --------------------------------------------------------------------------
