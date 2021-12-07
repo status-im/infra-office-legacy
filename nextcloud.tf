@@ -1,10 +1,10 @@
 module "nextcloud" {
-  source     = "github.com/status-im/infra-tf-digital-ocean"
-  host_count = 1
-  env        = "nextcloud"
-  group      = "nextcloud"
-  size       = "s-4vcpu-8gb"
-  domain     = var.domain
+  source = "github.com/status-im/infra-tf-digital-ocean"
+
+  env    = "nextcloud"
+  group  = "nextcloud"
+  type   = "s-4vcpu-8gb"
+  domain = var.domain
 
   open_tcp_ports = ["80", "443"]
 }

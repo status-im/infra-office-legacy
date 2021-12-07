@@ -1,12 +1,12 @@
 /* Various productivity tools ------------------*/
 
 module "todo" {
-  source     = "github.com/status-im/infra-tf-digital-ocean"
-  host_count = 1
-  env        = "todo"
-  group      = "todo"
-  size       = "s-2vcpu-4gb"
-  domain     = var.domain
+  source = "github.com/status-im/infra-tf-digital-ocean"
+
+  env    = "todo"
+  group  = "todo"
+  type   = "s-2vcpu-4gb"
+  domain = var.domain
 
   open_tcp_ports = ["80", "443"]
 }

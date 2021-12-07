@@ -3,7 +3,7 @@ module "keycloak" {
 
   env    = "keycloak"
   group  = "keycloak"
-  size   = "s-1vcpu-2gb"
+  type   = "s-1vcpu-2gb"
   domain = var.domain
 
   open_tcp_ports = ["80", "443"]

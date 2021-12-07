@@ -1,12 +1,12 @@
 /* Various productivity tools ------------------*/
 
 module "gitea" {
-  source     = "github.com/status-im/infra-tf-digital-ocean"
-  host_count = 1
-  env        = "gitea"
-  group      = "gitea"
-  size       = "s-1vcpu-2gb"
-  domain     = var.domain
+  source = "github.com/status-im/infra-tf-digital-ocean"
+
+  env    = "gitea"
+  group  = "gitea"
+  type   = "s-1vcpu-2gb"
+  domain = var.domain
 
   data_vol_size = 30
 
