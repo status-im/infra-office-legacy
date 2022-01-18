@@ -11,7 +11,7 @@
 
 - name: oauth-proxy
   src: git@github.com:status-im/infra-role-oauth-proxy.git
-  version: 05ef1410abe09db6df6e58ca14c556b7e2c383d7
+  version: b1b60917e839f9205af3952574b1f2c893aaedba
   scm: git
 
 - name: open-ports
@@ -36,7 +36,7 @@
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: a404e479eee9bc00ef0bc911fc5b0c5e1ca8dfea
+  version: a5ab4b97d0ccdaed3489dba535624f85ab484f9f
   scm: git
 
 - name: infra-role-wireguard

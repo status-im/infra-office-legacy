@@ -1,0 +1,53 @@
+---
+daybyday_crm_service_name: 'daybyday-crm'
+daybyday_crm_service_path: '/docker/{{ daybyday_crm_service_name }}'
+daybyday_crm_compose_file: '{{ daybyday_crm_service_path }}/docker-compose.yml'
+
+# Admin user
+#daybyday_crm_admin_user_name: 'admin'
+#daybyday_crm_admin_user_pass: 'super-secret-password'
+#daybyday_crm_admin_user_email: 'admin@example.org'
+
+# Public domain
+#daybyday_crm_domain: 'crm.example.org'
+
+# App --------------------------------------------
+daybyday_crm_app_cont_name: '{{ daybyday_crm_service_name }}-app'
+daybyday_crm_app_cont_tag: '2.2.0'
+daybyday_crm_app_cont_image: 'statusteam/daybyday-crm:{{ daybyday_crm_app_cont_tag }}'
+daybyday_crm_app_cont_port: 8080
+# Chrome------------------------------------------
+daybyday_crm_chrome_cont_name: '{{ daybyday_crm_service_name }}-chrome'
+daybyday_crm_chrome_cont_tag: 'headless-74.0.3729.6'
+daybyday_crm_chrome_cont_image: 'robcherry/docker-chromedriver'
+daybyday_crm_chrome_cont_port: 9515
+# Cache ------------------------------------------
+daybyday_crm_cache_cont_name: '{{ daybyday_crm_service_name }}-cache'
+daybyday_crm_cache_cont_vol: '{{ daybyday_crm_service_path }}/cache'
+daybyday_crm_cache_cont_image: 'bitnami/redis:6.2.6'
+daybyday_crm_cache_cont_port: 6379
+# DB ---------------------------------------------
+daybyday_crm_db_cont_name: '{{ daybyday_crm_service_name }}-db'
+daybyday_crm_db_cont_vol: '{{ daybyday_crm_service_path }}/db'
+daybyday_crm_db_cont_image: 'mysql:5.7'
+daybyday_crm_db_cont_port: 3306
+daybyday_crm_db_cont_uid: 999
+daybyday_crm_db_host_uid: '{{ 100000 + daybyday_crm_db_cont_uid | int }}'
+daybyday_crm_db_name: 'daybydaycrm'
+daybyday_crm_db_user: 'daybydaycrm'
+daybyday_crm_db_pass: 'changeIfYouCare'
+# ES ---------------------------------------------
+daybyday_crm_es_cont_name: '{{ daybyday_crm_service_name }}-es'
+daybyday_crm_es_cont_vol: '{{ daybyday_crm_service_path }}/es'
+daybyday_crm_es_cont_image: 'docker.elastic.co/elasticsearch/elasticsearch:6.4.1'
+daybyday_crm_es_cont_port: 9200
+daybyday_crm_es_cont_uid: 1000
+daybyday_crm_es_host_uid: '{{ 100000 + daybyday_crm_es_cont_uid | int }}'
+daybyday_crm_es_cluster_name: '{{ daybyday_crm_service_name }}'
+daybyday_crm_es_java_opts: '-Xms512m -Xmx512m'
+
+
+# general container management
+compose_state: 'present'
+compose_recreate: 'smart'
+compose_restart: false

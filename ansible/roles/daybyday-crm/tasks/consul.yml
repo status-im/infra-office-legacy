@@ -1,0 +1,19 @@
+---
+- name: Create Consul service definition
+  include_role: name=consul-service
+  vars:
+    consul_config_name: '{{ daybyday_crm_service_name }}'
+    consul_services:
+      - id: '{{ daybyday_crm_service_name }}'
+        name: 'ssl-proxy-backend'
+        tags: ['ssl-proxy-backend', 'daybyday_crm', 'waku', 'metrics']
+        # we advertise the port with basic auth
+        port: '{{ daybyday_crm_app_cont_port }}'
+        address: '{{ ansible_local.wireguard.vpn_ip }}'
+        meta:
+          proxy_fqdn: '{{ daybyday_crm_domain | mandatory }}'
+        checks:
+          - id: '{{ daybyday_crm_service_name }}-status'
+            name: daybyday_crm Healthcheck
+            type: http
+            http: 'http://localhost:{{ daybyday_crm_app_cont_port }}/health'

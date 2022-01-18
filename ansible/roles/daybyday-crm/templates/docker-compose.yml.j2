@@ -1,0 +1,83 @@
+---
+version: '3.7'
+services:
+  app:
+    container_name: '{{ daybyday_crm_app_cont_name }}'
+    image: '{{ daybyday_crm_app_cont_image }}'
+    restart: 'always'
+    ports:
+      - '9000:9000/tcp' # php-fpm
+      - '{{ daybyday_crm_app_cont_port }}:80/tcp' # nginx
+    env_file: app.env
+    depends_on:
+      - chrome
+      - cache
+      - db
+      - es
+
+  chrome:
+    container_name: '{{ daybyday_crm_chrome_cont_name }}'
+    image: '{{ daybyday_crm_chrome_cont_image }}'
+    restart: 'always'
+    environment:
+      CHROMEDRIVER_WHITELISTED_IPS: ''
+      CHROMEDRIVER_PORT: '{{ daybyday_crm_chrome_cont_port }}'
+    ports:
+      - '{{ daybyday_crm_chrome_cont_port }}:{{ daybyday_crm_chrome_cont_port }}'
+    cap_add:
+      - 'SYS_ADMIN'
+
+  cache:
+    image: '{{ daybyday_crm_cache_cont_image }}'
+    container_name: '{{ daybyday_crm_cache_cont_name }}'
+    restart: 'always'
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+    # docker-entrypoint.sh tries to chown /data which will not work
+    entrypoint: redis-server
+    volumes:
+      - '{{ daybyday_crm_cache_cont_vol }}:/bitnami/redis/data'
+    ports:
+      - '{{ daybyday_crm_cache_cont_port }}:{{ daybyday_crm_cache_cont_port }}'
+
+  db:
+    container_name: '{{ daybyday_crm_db_cont_name }}'
+    image: '{{ daybyday_crm_db_cont_image }}'
+    #user: root
+    restart: 'always'
+    environment:
+      MYSQL_TCP_PORT:      '{{ daybyday_crm_db_cont_port }}'
+      MYSQL_DATABASE:      '{{ daybyday_crm_db_name }}'
+      MYSQL_ROOT_PASSWORD: '{{ daybyday_crm_db_pass }}'
+      MYSQL_USER:          '{{ daybyday_crm_db_user }}'
+      MYSQL_PASSWORD:      '{{ daybyday_crm_db_pass }}'
+    ports:
+      - '{{ daybyday_crm_db_cont_port }}:{{ daybyday_crm_db_cont_port }}/tcp'
+    tmpfs:
+      - '/run/postgresql'
+      - '/tmp'
+    volumes:
+      - '{{ daybyday_crm_db_cont_vol }}/data:/var/lib/postgresql/data'
+      - '{{ daybyday_crm_db_cont_vol }}/backup:/backup'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  es:
+    container_name: '{{ daybyday_crm_es_cont_name }}'
+    image: '{{ daybyday_crm_es_cont_image }}'
+    restart: 'always'
+    environment:
+      cluster.name: '{{ daybyday_crm_es_cluster_name }}'
+      bootstrap.memory_lock: 'true'
+      ES_JAVA_OPTS: '{{ daybyday_crm_es_java_opts }}'
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - '{{ daybyday_crm_es_cont_vol }}:/usr/share/elasticsearch/data'
+    ports:
+      - '{{ daybyday_crm_es_cont_port }}:{{ daybyday_crm_es_cont_port }}'
