@@ -16,4 +16,4 @@
           - id: '{{ daybyday_crm_service_name }}-status'
             name: daybyday_crm Healthcheck
             type: http
-            http: 'http://localhost:{{ daybyday_crm_app_cont_port }}/health'
+            http: 'http://localhost:{{ daybyday_crm_app_cont_port }}/favicon.ico'
