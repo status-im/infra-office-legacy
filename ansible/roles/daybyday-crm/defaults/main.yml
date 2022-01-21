@@ -13,7 +13,7 @@ daybyday_crm_compose_file: '{{ daybyday_crm_service_path }}/docker-compose.yml'
 
 # App --------------------------------------------
 daybyday_crm_app_cont_name: '{{ daybyday_crm_service_name }}-app'
-daybyday_crm_app_cont_tag: '2.2.0'
+daybyday_crm_app_cont_tag: '2.2.1'
 daybyday_crm_app_cont_image: 'statusteam/daybyday-crm:{{ daybyday_crm_app_cont_tag }}'
 daybyday_crm_app_cont_port: 8080
 # Chrome------------------------------------------
