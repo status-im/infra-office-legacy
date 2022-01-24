@@ -10,9 +10,14 @@ services:
     volumes:
       - '{{ daybyday_crm_proxy_cont_vol }}/nginx.conf:/etc/nginx/nginx.conf:ro'
     command: |
-      nginx -g "daemon off;"
+      nginx -g 'daemon off;'
     depends_on:
       - app
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ daybyday_crm_proxy_cont_port }}/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   app:
     container_name: '{{ daybyday_crm_app_cont_name }}'
@@ -30,6 +35,11 @@ services:
       - cache
       - db
       - es
+    healthcheck:
+      test: ['CMD', 'nc', '-z', 'localhost', '{{ daybyday_crm_app_cont_port }}']
+      interval: 30s
+      timeout: 2s
+      retries: 3
 
   chrome:
     container_name: '{{ daybyday_crm_chrome_cont_name }}'
@@ -42,6 +52,11 @@ services:
       - '{{ daybyday_crm_chrome_cont_port }}:{{ daybyday_crm_chrome_cont_port }}'
     cap_add:
       - 'SYS_ADMIN'
+    healthcheck:
+      test: ['CMD', 'curl', '-sSf', 'localhost:{{ daybyday_crm_chrome_cont_port }}/sessions']
+      interval: 30s
+      timeout: 2s
+      retries: 3
 
   cache:
     image: '{{ daybyday_crm_cache_cont_image }}'
@@ -55,6 +70,11 @@ services:
       - '{{ daybyday_crm_cache_cont_vol }}:/bitnami/redis/data'
     ports:
       - '{{ daybyday_crm_cache_cont_port }}:{{ daybyday_crm_cache_cont_port }}'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   db:
     container_name: '{{ daybyday_crm_db_cont_name }}'
@@ -76,7 +96,7 @@ services:
       - '{{ daybyday_crm_db_cont_vol }}/data:/var/lib/postgresql/data'
       - '{{ daybyday_crm_db_cont_vol }}/backup:/backup'
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ['CMD', 'mysqladmin' ,'ping', '-h', 'localhost']
       interval: 30s
       timeout: 10s
       retries: 10
@@ -97,3 +117,8 @@ services:
       - '{{ daybyday_crm_es_cont_vol }}:/usr/share/elasticsearch/data'
     ports:
       - '{{ daybyday_crm_es_cont_port }}:{{ daybyday_crm_es_cont_port }}'
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:{{ daybyday_crm_es_cont_port }}/_cluster/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3

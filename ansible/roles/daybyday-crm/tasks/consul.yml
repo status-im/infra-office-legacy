@@ -8,7 +8,7 @@
         name: 'ssl-proxy-backend'
         tags: ['ssl-proxy-backend', 'daybyday_crm', 'waku', 'metrics']
         # we advertise the port with basic auth
-        port: '{{ daybyday_crm_app_cont_port }}'
+        port: '{{ daybyday_crm_proxy_cont_port }}'
         address: '{{ ansible_local.wireguard.vpn_ip }}'
         meta:
           proxy_fqdn: '{{ daybyday_crm_domain | mandatory }}'
@@ -16,4 +16,4 @@
           - id: '{{ daybyday_crm_service_name }}-status'
             name: daybyday_crm Healthcheck
             type: http
-            http: 'http://localhost:{{ daybyday_crm_app_cont_port }}/favicon.ico'
+            http: 'http://localhost:{{ daybyday_crm_proxy_cont_port }}/health'

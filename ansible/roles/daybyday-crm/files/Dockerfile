@@ -19,6 +19,7 @@ RUN apt-get update && \
     nginx \
     nano \
     wget \
+    netcat \
     python3 \
     python3-pip \
     && pecl channel-update pecl.php.net \
