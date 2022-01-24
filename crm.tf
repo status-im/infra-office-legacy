@@ -5,7 +5,7 @@ module "crm" {
 
   env    = "crm"
   group  = "crm"
-  type   = "s-1vcpu-2gb"
+  type   = "s-2vcpu-4gb"
   domain = var.domain
 
   open_tcp_ports = ["80", "443"]
