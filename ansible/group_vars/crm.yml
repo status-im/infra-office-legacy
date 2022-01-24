@@ -10,6 +10,16 @@ daybyday_crm_admin_user_email: 'devops@status.im'
 # Ports
 daybyday_crm_proxy_cont_port: 9080
 
+# Restic Backups
+restic_user_groups: ['docker', 'dockremap']
+restic_backups:
+  - name: 'daybyday-crm-db'
+    tags: ['mysqldump']
+    path: '/docker/daybyday-crm/db/backup'
+    after: 'dump-daybyday-crm-db.service'
+    frequency: 'daily'
+    timeout: 300
+
 # Open Nginx Ports
 open_ports_default_comment: 'Nginx'
 open_ports_default_chain: 'SERVICES'

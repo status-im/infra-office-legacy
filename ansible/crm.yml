@@ -17,5 +17,5 @@
     - { role: origin-certs,   tags: origin-certs }
     - { role: daybyday-crm,   tags: daybyday-crm }
     - { role: nginx,          tags: nginx }
-    #- { role: restic-backups, tags: restic-backups }
-    #- { role: threatstack,    tags: threatstack }
+    - { role: restic-backups, tags: restic-backups }
+    - { role: threatstack,    tags: threatstack }
