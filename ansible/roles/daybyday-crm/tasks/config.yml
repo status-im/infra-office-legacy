@@ -12,7 +12,7 @@
 - name: Check if database needs seeding
   command: |
     docker exec {{ daybyday_crm_db_cont_name }} \
-      mysql -p --password=changeIfYouCare daybydaycrm \
+      mysql -p --password='{{ daybyday_crm_db_pass }}' daybydaycrm \
       -e 'SELECT name FROM users;'
   register: users_query
 

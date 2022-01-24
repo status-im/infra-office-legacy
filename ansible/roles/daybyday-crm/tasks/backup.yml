@@ -1,0 +1,21 @@
+---
+- name: 'Create timer for MongoDB backup: {{ hackmd_db_backup_service_name }}'
+  include_role: name=systemd-timer
+  vars:
+    systemd_timer_name: '{{ daybyday_crm_db_backup_service_name }}'
+    systemd_timer_description: 'Dump HackMD PostgreSQL database.'
+    systemd_timer_user: '{{ daybyday_crm_db_backup_user }}'
+    systemd_timer_frequency: '{{ daybyday_crm_db_backup_frequency }}'
+    systemd_timer_timeout_sec: '{{ daybyday_crm_db_backup_timeout }}'
+    systemd_timer_after_extra: 'docker.service'
+    systemd_timer_start_on_creation: false
+    systemd_timer_script_content: |
+      #!/usr/bin/env bash
+      BKP_PATH='{{ daybyday_crm_db_cont_vol }}/backup/{{ daybyday_crm_db_name }}.sql'
+      /usr/bin/docker exec -i {{ daybyday_crm_db_cont_name }} \
+        mysqldump \
+          -u {{ daybyday_crm_db_user }} \
+          --password='{{ daybyday_crm_db_pass }}' \
+          {{ daybyday_crm_db_name }} \
+          > "${BKP_PATH}"
+      chmod 0640 "${BKP_PATH}"

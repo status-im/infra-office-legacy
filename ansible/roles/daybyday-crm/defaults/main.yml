@@ -52,6 +52,11 @@ daybyday_crm_es_host_uid: '{{ 100000 + daybyday_crm_es_cont_uid | int }}'
 daybyday_crm_es_cluster_name: '{{ daybyday_crm_service_name }}'
 daybyday_crm_es_java_opts: '-Xms512m -Xmx512m'
 
+# Database backups
+daybyday_crm_db_backup_service_name: 'dump-{{ daybyday_crm_service_name }}-db'
+daybyday_crm_db_backup_user: 'root'
+daybyday_crm_db_backup_timeout: 120
+daybyday_crm_db_backup_frequency: 'daily'
 
 # general container management
 compose_state: 'present'
