@@ -1,29 +1,33 @@
 ---
-- name: Create directory for DB data
+- name: Create container directories
   file:
-    path: '{{ item }}'
-    owner: '{{ daybyday_crm_db_host_uid }}'
-    group: dockremap
+    path: '{{ item.p }}'
+    owner: '{{ item.o }}'
+    group: 'docker'
     state: directory
     recurse: true
   with_items:
-    - '{{ daybyday_crm_db_cont_vol }}/data'
-    - '{{ daybyday_crm_db_cont_vol }}/backup'
+    - { p: '{{ daybyday_crm_db_cont_vol }}/data',   o: '{{ daybyday_crm_db_host_uid }}' }
+    - { p: '{{ daybyday_crm_db_cont_vol }}/backup', o: '{{ daybyday_crm_db_host_uid }}' }
+    - { p: '{{ daybyday_crm_es_cont_vol }}',        o: '{{ daybyday_crm_es_host_uid }}' }
+    - { p: '{{ daybyday_crm_proxy_cont_vol }}',     o: 'dockremap' }
+    - { p: '{{ daybyday_crm_app_cont_vol }}',       o: 'dockremap' }
+  loop_control:
+    label: '{{ item.p }}'
 
-- name: Create directory for ES data
-  file:
-    path: '{{ daybyday_crm_es_cont_vol }}'
-    owner: '{{ daybyday_crm_es_host_uid }}'
-    group: dockremap
-    state: directory
-    recurse: true
-
-- name: Create environment file
+- name: Create configuration files
   template:
-    src: 'app.env.j2'
-    dest: '{{ daybyday_crm_service_path }}/app.env'
+    src: '{{ item.s }}'
+    dest: '{{ item.d }}'
     owner: 'dockremap'
     group: 'docker'
+  with_items:
+    - { s: 'app.env.j2',       d: '{{ daybyday_crm_service_path }}/app.env' }
+    - { s: 'nginx.conf.j2',    d: '{{ daybyday_crm_proxy_cont_vol }}/nginx.conf' }
+    - { s: 'fpm-pool.conf.j2', d: '{{ daybyday_crm_app_cont_vol }}/fpm-pool.conf' }
+  loop_control:
+    label: '{{ item.d }}'
+  register: config_files
 
 - name: Create compose file
   template:
@@ -39,5 +43,5 @@
     pull: true
     build: false
     state: '{{ compose_state }}'
-    restarted: '{{ compose_restart }}'
+    restarted: '{{ config_files.changed or compose_restart }}'
     recreate: '{{ compose_recreate | default("smart") }}'

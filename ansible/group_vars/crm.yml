@@ -8,7 +8,7 @@ daybyday_crm_admin_user_name: 'admin'
 daybyday_crm_admin_user_pass: '..123qweASD..'
 daybyday_crm_admin_user_email: 'devops@status.im'
 # Ports
-daybyday_crm_app_cont_port: 8080
+daybyday_crm_proxy_cont_port: 9080
 
 # Open Nginx Ports
 open_ports_default_comment: 'Nginx'
@@ -32,6 +32,6 @@ nginx_sites:
     - ssl_certificate_key /certs/origin.key
 
     - location / {
-        proxy_pass http://127.0.0.1:{{ daybyday_crm_app_cont_port }}/;
+        proxy_pass http://127.0.0.1:{{ daybyday_crm_proxy_cont_port }}/;
         include /etc/nginx/proxy_params;
       }

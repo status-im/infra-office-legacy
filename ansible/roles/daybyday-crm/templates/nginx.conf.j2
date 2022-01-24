@@ -1,0 +1,43 @@
+events {
+    worker_connections  1024;
+}
+
+http {
+    server {
+        listen {{ daybyday_crm_proxy_cont_port }};
+        server_name localhost;
+        root        /var/www/html/public;
+
+        rewrite_log on;
+        error_log /var/log/nginx/localhost.error_log notice;
+        rewrite     ^(/.*)\.html(\?.*)?$ $1$2 permanent;
+        index       index.php;
+
+        location / {
+            try_files $uri/index.html $uri.html $uri/ $uri /index.php$is_args$args;
+        }
+
+        # pass on real client IP
+        proxy_set_header X-Real-IP  $remote_addr;
+
+        include /etc/nginx/mime.types;
+
+        location ~ (\.php|status|ping)$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass  app:{{ daybyday_crm_app_cont_port }};
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+            fastcgi_param DOCUMENT_ROOT $realpath_root;
+            include fastcgi_params;
+        }
+
+        location /health {
+          return 200 "OK\n";
+        }
+
+        if (!-d $request_filename) {
+            rewrite ^/(.+)/$ /$1 permanent;
+        }
+    }
+}

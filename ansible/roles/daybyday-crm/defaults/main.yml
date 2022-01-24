@@ -13,9 +13,15 @@ daybyday_crm_compose_file: '{{ daybyday_crm_service_path }}/docker-compose.yml'
 
 # App --------------------------------------------
 daybyday_crm_app_cont_name: '{{ daybyday_crm_service_name }}-app'
+daybyday_crm_app_cont_vol: '{{ daybyday_crm_service_path }}/app'
 daybyday_crm_app_cont_tag: '2.2.1'
 daybyday_crm_app_cont_image: 'statusteam/daybyday-crm:{{ daybyday_crm_app_cont_tag }}'
-daybyday_crm_app_cont_port: 8080
+daybyday_crm_app_cont_port: 9000
+# Proxy ------------------------------------------
+daybyday_crm_proxy_cont_name: '{{ daybyday_crm_service_name }}-proxy'
+daybyday_crm_proxy_cont_vol: '{{ daybyday_crm_service_path }}/proxy'
+daybyday_crm_proxy_cont_image: '{{ daybyday_crm_app_cont_image }}'
+daybyday_crm_proxy_cont_port: 9080
 # Chrome------------------------------------------
 daybyday_crm_chrome_cont_name: '{{ daybyday_crm_service_name }}-chrome'
 daybyday_crm_chrome_cont_tag: 'headless-74.0.3729.6'

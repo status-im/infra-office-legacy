@@ -1,14 +1,30 @@
 ---
 version: '3.7'
 services:
+  proxy:
+    container_name: '{{ daybyday_crm_proxy_cont_name }}'
+    image: '{{ daybyday_crm_proxy_cont_image }}'
+    restart: 'always'
+    ports:
+      - '{{ daybyday_crm_proxy_cont_port }}:{{ daybyday_crm_proxy_cont_port }}/tcp'
+    volumes:
+      - '{{ daybyday_crm_proxy_cont_vol }}/nginx.conf:/etc/nginx/nginx.conf:ro'
+    command: |
+      nginx -g "daemon off;"
+    depends_on:
+      - app
+
   app:
     container_name: '{{ daybyday_crm_app_cont_name }}'
     image: '{{ daybyday_crm_app_cont_image }}'
     restart: 'always'
     ports:
-      - '9000:9000/tcp' # php-fpm
-      - '{{ daybyday_crm_app_cont_port }}:80/tcp' # nginx
+      - '{{ daybyday_crm_app_cont_port }}:{{ daybyday_crm_app_cont_port }}/tcp'
+    volumes:
+      - '{{ daybyday_crm_app_cont_vol }}/fpm-pool.conf:/etc/fpm-pool.conf:ro'
     env_file: app.env
+    command: |
+      php-fpm -y /etc/fpm-pool.conf
     depends_on:
       - chrome
       - cache
