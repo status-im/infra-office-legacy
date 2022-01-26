@@ -13,7 +13,7 @@
     state: '{{ compose_state }}'
     recreate: '{{ collabora_conf.changed | ternary("always", compose_recreate) }}'
     # WARNING: This can cause restart RIGHT after creation, breaking installation.
-    restarted: '{{ compose_restart }}'
+    restarted: '{{ nextcloud_config.changed or compose_restart }}'
     pull: true
     # Avoid deprecation warning
     tls_hostname: 'localhost'

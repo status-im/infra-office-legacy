@@ -7,6 +7,10 @@ nextcloud_domain: 'cloud.status.im'
 nextcloud_docs_domain: 'collabora.status.im'
 # Admin
 nextcloud_admin_password: '{{lookup("bitwarden", "nextcloud/admin")}}'
+# Secrets
+nextcloud_instance_id: '{{lookup("bitwarden", "nextcloud/secrets", field="instance-id")}}'
+nextcloud_password_salt: '{{lookup("bitwarden", "nextcloud/secrets", field="password-salt")}}'
+nextcloud_encryption_key: '{{lookup("bitwarden", "nextcloud/secrets", field="encryption-key")}}'
 # Apps
 nextcloud_enabled_apps:
   - appointments

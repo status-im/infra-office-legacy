@@ -6,11 +6,12 @@ services:
     image: '{{ nextcloud_app_cont_image }}'
     restart: 'always'
     env_file: '{{ nextcloud_service_path }}/app.env'
+    entrypoint: '/usr/local/bin/apache2-foreground'
     ports:
       - '{{ nextcloud_app_cont_port }}:80'
     volumes:
       - '{{ nextcloud_app_cont_vol }}/data:/data'
-      - '{{ nextcloud_app_cont_vol }}/logs.config.php:/usr/src/nextcloud/config/logs.config.php'
+      - '{{ nextcloud_app_cont_vol }}/config:/var/www/html/config'
     depends_on:
       - db
       - cache
