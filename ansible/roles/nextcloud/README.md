@@ -56,3 +56,7 @@ Fri 2021-08-06 00:00:00 UTC 11h left n/a  n/a    dump-nextcloud-db.timer     dum
 
 3 timers listed.
 ```
+
+# Details
+
+For more information on enryption see [`ENCRYPTION.md`](./ENCRYPTION.md).
