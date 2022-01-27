@@ -6,6 +6,7 @@ nextcloud_compose_file: '{{ nextcloud_service_path }}/docker-compose.yml'
 # Proxy
 #nextcloud_domain: ~
 # Admin
+nextcloud_admin_email: 'admin@example.org'
 nextcloud_admin_username: 'admin'
 nextcloud_admin_password: 'changeMeIfYouCare'
 # Secrets
