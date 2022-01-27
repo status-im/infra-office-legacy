@@ -17,10 +17,10 @@ resource "cloudflare_record" "nextcloud" {
   proxied = true
 }
 
-resource "cloudflare_record" "collabora" {
+resource "cloudflare_record" "onlyoffice" {
   zone_id = local.zones["status.im"]
   value   = module.nextcloud.public_ips[0]
-  name    = "collabora"
+  name    = "onlyoffice"
   type    = "A"
   proxied = true
 }

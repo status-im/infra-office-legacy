@@ -14,10 +14,13 @@
     state: 'directory'
   with_items:
     - { p: '{{ nextcloud_service_path }}',       g: 'docker' }
-    - { p: '{{ nextcloud_app_cont_vol }}/data',  o: '{{ nextcloud_app_host_uid }}',  g: 'nextcloud' }
+    - { p: '{{ nextcloud_app_cont_vol }}/data',  o: '{{ nextcloud_app_host_uid }}',     g: 'nextcloud' }
     - { p: '{{ nextcloud_app_cont_vol }}/config',o: '{{ nextcloud_app_host_uid }}',     g: 'nextcloud' }
-    - { p: '{{ nextcloud_db_cont_vol }}/data',   o: '{{ nextcloud_db_host_uid }}',   g: 'docker', m: '0777' }
-    - { p: '{{ nextcloud_docs_cont_vol }}/conf', o: '{{ nextcloud_docs_host_uid }}', g: 'docker', m: '0755' }
+    - { p: '{{ nextcloud_db_cont_vol }}/data',   o: '{{ nextcloud_db_host_uid }}',      g: 'docker',    m: '0777' }
+    - { p: '{{ nextcloud_docs_cont_vol }}/db',   o: '{{ nextcloud_docs_host_uids["db"] }}',  g: 'dockremap', m: '0777' }
+    - { p: '{{ nextcloud_docs_cont_vol }}/data', o: '{{ nextcloud_docs_host_uids["app"] }}', g: 'dockremap' }
+    - { p: '{{ nextcloud_docs_cont_vol }}/logs', o: '{{ nextcloud_docs_host_uids["app"] }}', g: 'dockremap' }
+  register: wat
 
 - name: Create NextCloud config
   template:
@@ -28,28 +31,13 @@
     mode: 0644
   register: nextcloud_config
 
-- name: Create Collabora config file
-  template:
-    src: 'loolwsd.xml.j2'
-    dest: '{{ nextcloud_docs_cont_vol }}/conf/loolwsd.xml'
-    owner: '{{ nextcloud_docs_host_uid }}'
-    group: 'docker'
-    mode: 0644
-  register: collabora_conf
-
-
 - name: Create Database env file
   template:
-    src: 'db.env.j2'
-    dest: '{{ nextcloud_service_path }}/db.env'
+    src: '{{ item }}.j2'
+    dest: '{{ nextcloud_service_path }}/{{ item }}'
     owner: 'dockremap'
     group: 'docker'
     mode: 0640
-
-- name: Create configuration file
-  template:
-    src: 'app.env.j2'
-    dest: '{{ nextcloud_service_path }}/app.env'
-    owner: 'dockremap'
-    group: 'docker'
-    mode: 0640
+  with_items:
+    - 'db.env'
+    - 'docs.env'

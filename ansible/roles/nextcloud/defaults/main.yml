@@ -34,18 +34,19 @@ nextcloud_app_cont_port: 9000
 nextcloud_app_cont_uid: 33
 nextcloud_app_host_uid: '{{ 100000 + nextcloud_app_cont_uid | int }}'
 nextcloud_app_log_levels: { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, FATAL: 4 }
-nextcloud_app_log_level: 'INFO'
+nextcloud_app_log_level: 'DEBUG'
 # Docs -------------------------------------------------------------------------
 nextcloud_docs_cont_name: '{{ nextcloud_service_name }}-docs'
 nextcloud_docs_cont_vol:  '{{ nextcloud_service_path }}/docs'
-nextcloud_docs_cont_verison: '6.4.10.6'
-nextcloud_docs_cont_image: 'collabora/code:{{ nextcloud_docs_cont_verison }}'
+nextcloud_docs_cont_verison: '7.0.0.132'
+nextcloud_docs_cont_image: 'onlyoffice/documentserver:{{ nextcloud_docs_cont_verison }}'
 nextcloud_docs_cont_port: 9980
-nextcloud_docs_cont_uid: 104
-nextcloud_docs_host_uid: '{{ 100000 + nextcloud_docs_cont_uid | int }}'
-nextcloud_docs_admin_user: 'admin'
-nextcloud_docs_admin_pass: 'changeMeIfYouCare'
-nextcloud_docs_log_level: 'information'
+nextcloud_docs_cont_uids: { db: 107, queue: 108, app: 109 }
+nextcloud_docs_host_uids:
+  db:    '{{ 100000 + nextcloud_docs_cont_uids["db"] | int }}'
+  queue: '{{ 100000 + nextcloud_docs_cont_uids["queue"] | int }}'
+  app:   '{{ 100000 + nextcloud_docs_cont_uids["app"] | int }}'
+#nextcloud_docs_secret_key: ~
 # Cache ------------------------------------------------------------------------
 nextcloud_cache_cont_name: '{{ nextcloud_service_name }}-cache'
 nextcloud_cache_cont_vol:  '{{ nextcloud_service_path }}/cache'

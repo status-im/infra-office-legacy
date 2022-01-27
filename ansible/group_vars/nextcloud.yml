@@ -4,7 +4,7 @@ swap_file_size_mb: 4096
 
 # NextCloud
 nextcloud_domain: 'cloud.status.im'
-nextcloud_docs_domain: 'collabora.status.im'
+nextcloud_docs_domain: 'onlyoffice.status.im'
 # Admin
 nextcloud_admin_email: 'devops@status.im'
 nextcloud_admin_password: '{{lookup("bitwarden", "nextcloud/admin")}}'
@@ -36,9 +36,9 @@ nextcloud_oauth_url: 'https://auth.status.im/auth/realms/status-im/protocol/open
 nextcloud_oauth_id: '{{ lookup("bitwarden", "nextcloud/oauth/keycloak", field="client-id") }}'
 nextcloud_oauth_secret: '{{ lookup("bitwarden", "nextcloud/oauth/keycloak", field="secret") }}'
 nextcloud_oauth_scope: 'openid'
-# Collabora
-nextcloud_docs_admin_pass: '{{ nextcloud_admin_password }}'
+# OnlyOffice
 nextcloud_docs_cont_port: 9980
+nextcloud_docs_secret_key: '{{lookup("bitwarden", "nextcloud/docs/jwt-secret")}}'
 # SMTP
 nextcloud_smtp_enabled: true
 nextcloud_smtp_port: 587
@@ -75,11 +75,11 @@ open_ports_list:
 
 # Nginx proxy
 nginx_sites:
-  nextcloud_http:
+  nextcloud_app_http:
     - listen 80
     - server_name {{ nextcloud_domain }}
     - return 302 https://$server_name$request_uri
-  nextcloud_https:
+  nextcloud_app_https:
     - listen 443 ssl
     - server_name {{ nextcloud_domain }}
 
@@ -96,24 +96,20 @@ nginx_sites:
         proxy_pass http://localhost:{{ nextcloud_app_cont_port }}/;
       }
 
-  collabora_http:
+  nextcloud_docs_http:
     - listen 80
     - server_name {{ nextcloud_docs_domain }}
     - return 302 https://$server_name$request_uri
-  collabora_https:
+  nextcloud_docs_https:
     - listen 443 ssl
     - server_name {{ nextcloud_docs_domain }}
 
     - ssl_certificate     /certs/status.im/origin.crt
     - ssl_certificate_key /certs/status.im/origin.key
 
-      # websockets
-    - location /lool {
-          proxy_pass http://localhost:{{ nextcloud_docs_cont_port }};
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "Upgrade";
-          proxy_set_header Host $http_host;
-          proxy_read_timeout 36000s;
+      # Not necessary, avoid crawlers.
+    - location = / {
+        return 418;
       }
 
     - location / {

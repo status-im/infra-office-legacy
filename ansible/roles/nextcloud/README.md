@@ -9,6 +9,7 @@ The bare minimum would include:
 nextcloud_domain: 'cloud.example.org'
 nextcloud_admin_username: 'admin'
 nextcloud_admin_password: 'super-secret-password'
+nextcloud_docs_secret_key: 'super-secret-key'
 nextcloud_password_salt: 'super-secret-password-salt'
 nextcloud_secret: 'super-secret-encryption-key'
 ```

@@ -11,7 +11,7 @@
   docker_compose:
     project_src: '{{ nextcloud_service_path }}'
     state: '{{ compose_state }}'
-    recreate: '{{ collabora_conf.changed | ternary("always", compose_recreate) }}'
+    recreate: '{{ compose_recreate }}'
     # WARNING: This can cause restart RIGHT after creation, breaking installation.
     restarted: '{{ nextcloud_config.changed or compose_restart }}'
     pull: true

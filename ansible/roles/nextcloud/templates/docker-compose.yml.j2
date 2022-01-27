@@ -25,24 +25,15 @@ services:
     container_name: '{{ nextcloud_docs_cont_name }}'
     image: '{{ nextcloud_docs_cont_image }}'
     restart: always
-    # Fix for "/usr/bin/loolmount: Operation not permitted"
-    # https://github.com/CollaboraOnline/online/issues/779
-    cap_add:
-      - SYS_ADMIN
-      - MKNOD
-    # Fix for 'routines:ssl3_read_bytes:sslv3 alert handshake failure'
-    # Makes Collabora talk to localhost Nginx instead of CloudFlare.
-    # Not necessary since 6.4.10.6, but makes things more secure and faster.
-    extra_hosts:
-      cloud.status.im: 'host-gateway'
-    environment:
-      DONT_GEN_SSL_CERT: 'true'
+    env_file: '{{ nextcloud_service_path }}/docs.env'
     ports:
-      - '{{ nextcloud_docs_cont_port }}:9980'
+      - '{{ nextcloud_docs_cont_port }}:80'
     volumes:
-      - '{{ nextcloud_docs_cont_vol }}/conf/loolwsd.xml:/etc/loolwsd/loolwsd.xml'
+      - '{{ nextcloud_docs_cont_vol }}/db:/var/lib/postgresql'
+      - '{{ nextcloud_docs_cont_vol }}/data:/var/lib/onlyoffice'
+      - '{{ nextcloud_docs_cont_vol }}/logs:/var/log/onlyoffice'
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:{{ nextcloud_docs_cont_port }}/"]
+      test: ["CMD", "curl", "--fail", "http://localhost:80/healthcheck"]
       interval: 30s
       timeout: 10s
       retries: 3
