@@ -18,4 +18,5 @@
           --password='{{ daybyday_crm_db_pass }}' \
           {{ daybyday_crm_db_name }} \
           > "${BKP_PATH}"
+      chgrp dockremap "${BKP_PATH}"
       chmod 0640 "${BKP_PATH}"
