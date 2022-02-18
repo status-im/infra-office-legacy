@@ -19,7 +19,7 @@ wekan_db_cont_port: 27017
 wekan_db_backup_name: 'dump-{{ wekan_db_cont_name }}'
 wekan_db_backup_user: 'root'
 wekan_db_backup_interval: 'daily'
-wekan_db_backup_timeout: 30
+wekan_db_backup_timeout: 600
 
 # Oauth
 wekan_oauth_enabled: false
