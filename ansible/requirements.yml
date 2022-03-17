@@ -9,11 +9,6 @@
   version: 60587f86e085255b537cc37647003af105214d20
   scm: git
 
-- name: oauth-proxy
-  src: git@github.com:status-im/infra-role-oauth-proxy.git
-  version: b1b60917e839f9205af3952574b1f2c893aaedba
-  scm: git
-
 - name: open-ports
   src: git@github.com:status-im/infra-role-open-ports.git
   version: 24dc30dbdf85e6758cb6924074b2f7a0f4541524
@@ -26,7 +21,7 @@
 
 - name: systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: 827033833eaf994d3b6f6ac1b555b90fdf1dd467
+  version: 49c37e1df8feb4d7938b3cc2ffc59f6dfed10231
   scm: git
 
 - name: restic-backups
@@ -36,12 +31,12 @@
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: 40abcc62b18ac5127866c9c413491a7b92451cac
+  version: 7280600c2c6cf532fdbbbb31481fdb068dd0573e
   scm: git
 
 - name: infra-role-wireguard
   src: git@github.com:status-im/infra-role-wireguard.git
-  version: 6cc6472e32b6dc53d7d854ab5a34d554451bec15
+  version: b711bbabd2dc3d9ce8b1c3a6e5bc785901db9d09
   scm: git
 
 - name: consul-service
