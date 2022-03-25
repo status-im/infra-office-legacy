@@ -4,7 +4,7 @@ $CONFIG = [
   'version' => '23.0.0.10',
   'installed' => true,
   /* AUTH */
-  'auth.webauthn.enabled' => true,
+  'auth.webauthn.enabled' => {{ nextcloud_webauthn_native_enaled | to_json }},
   /* ENCRYPTION */
   /* WARNING: All three have to be present and the same */
   'instanceid' => '{{ nextcloud_instance_id | mandatory }}',

@@ -28,6 +28,7 @@ nextcloud_admin_password: 'changeMeIfYouCare'
 # Apps
 nextcloud_enabled_apps: []
 nextcloud_disabled_apps: []
+nextcloud_webauthn_native_enaled: true
 # Oauth
 nextcloud_oauth_enabled: false
 #nextcloud_oauth_name: 'Keycloak'

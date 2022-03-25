@@ -24,10 +24,13 @@ nextcloud_enabled_apps:
   - sociallogin
   - spreed
   - twofactor_totp
-  - twofactor_u2f
+  - twofactor_webauthn
 nextcloud_disabled_apps:
   - tasks
   - integration_whiteboard
+  - twofactor_u2f
+# This allows for passwordless login.
+nextcloud_webauthn_native_enaled: false
 # OAuth
 nextcloud_oauth_enabled: true
 nextcloud_oauth_name: 'Keycloak'
