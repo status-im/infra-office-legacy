@@ -10,9 +10,13 @@ nextcloud_trusted_domains:
   - '{{ nextcloud_domain }}'
   - '{{ nextcloud_docs_domain }}'
 nextcloud_trusted_proxies:
-  - '127.0.0.1'     # localhost
+  - '127.0.0.0/8'   # localhost
   - '10.0.0.0/8'    # VPN
   - '172.17.0.0/16' # Docker
+nextcloud_forwarded_for_headers:
+  - 'HTTP_X_REAL_IP'
+  - 'HTTP_FORWARDED_FOR'
+  - 'HTTP_FORWARDED_PROTO'
 # Admin
 nextcloud_admin_email: 'admin@example.org'
 nextcloud_admin_username: 'admin'

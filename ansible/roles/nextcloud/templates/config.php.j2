@@ -15,6 +15,7 @@ $CONFIG = [
   'overwriteprotocol' => 'https',
   'trusted_domains' => {{ nextcloud_trusted_domains | to_json }},
   'trusted_proxies' => {{ nextcloud_trusted_proxies | to_json }},
+  'forwarded_for_headers' => {{ nextcloud_forwarded_for_headers | to_json }},
   /* LOGS */
   'log_type' => 'file',
   'logfile' => '/data/nextcloud.log',
