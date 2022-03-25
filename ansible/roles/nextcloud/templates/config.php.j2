@@ -3,6 +3,8 @@
 $CONFIG = [
   'version' => '23.0.0.10',
   'installed' => true,
+  /* AUTH */
+  'auth.webauthn.enabled' => true,
   /* ENCRYPTION */
   /* WARNING: All three have to be present and the same */
   'instanceid' => '{{ nextcloud_instance_id | mandatory }}',
