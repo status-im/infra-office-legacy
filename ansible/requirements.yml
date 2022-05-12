@@ -21,7 +21,7 @@
 
 - name: systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: 49c37e1df8feb4d7938b3cc2ffc59f6dfed10231
+  version: c6bbc3d1b4b0ba603d82fa06cd17297d12523182
   scm: git
 
 - name: restic-backups
@@ -31,7 +31,7 @@
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: 7280600c2c6cf532fdbbbb31481fdb068dd0573e
+  version: 50eda0808cceaaad2a5c5cdb4493935f2e3a637d
   scm: git
 
 - name: infra-role-wireguard
@@ -41,7 +41,7 @@
 
 - name: consul-service
   src: git@github.com:status-im/infra-role-consul-service.git
-  version: 7ee51839e6a032e6ca27dfb00951e897b5385609
+  version: 2b3d4e53856d6cc91ae5c5a342fd12f2bb96aa88
   scm: git
 
 - name: threatstack
