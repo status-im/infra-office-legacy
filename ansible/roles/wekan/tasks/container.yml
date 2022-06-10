@@ -3,7 +3,8 @@
   file:
     path: '{{ item }}'
     state: directory
-    owner: 'dockremap'
+    owner: '{{ wekan_db_host_uid }}'
+    group: 'dockremap'
     recurse: true
   with_items:
     - '{{ wekan_db_cont_vol }}/data'

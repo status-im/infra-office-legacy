@@ -36,13 +36,15 @@ services:
     container_name: '{{ wekan_db_cont_name }}'
     image: '{{ wekan_db_cont_image }}'
     restart: always
-    entrypoint: mongod
     command: |
-      --smallfiles
+      mongod
+      --quiet
       --oplogSize=128
     ports:
       - '{{ wekan_db_cont_port }}:{{ wekan_db_cont_port }}'
     volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/etc/timezone:/etc/timezone:ro'
       - '{{ wekan_db_cont_vol }}/data:/data/db'
       - '{{ wekan_db_cont_vol }}/backup:/backup'
     healthcheck:

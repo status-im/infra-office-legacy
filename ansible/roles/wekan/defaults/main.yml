@@ -7,14 +7,16 @@ wekan_domain: 'wekan.example.org'
 
 # App --------------------------------------------------------------------------
 wekan_app_cont_name: '{{ wekan_service_name }}-app'
-wekan_app_cont_tag: 'v6.05'
+wekan_app_cont_tag: 'v6.27'
 wekan_app_cont_image: 'wekanteam/wekan:{{ wekan_app_cont_tag }}'
 wekan_app_cont_port: 8280
 # App --------------------------------------------------------------------------
 wekan_db_cont_name: '{{ wekan_service_name }}-db'
 wekan_db_cont_vol: '{{ wekan_service_path }}/db'
-wekan_db_cont_image: 'mongo:3.2.21'
+wekan_db_cont_image: 'mongo:5.0.9'
 wekan_db_cont_port: 27017
+wekan_db_cont_uid: 999
+wekan_db_host_uid: '{{ 100000 + octobox_db_cont_uid | int }}'
 # Backups - https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data
 wekan_db_backup_name: 'dump-{{ wekan_db_cont_name }}'
 wekan_db_backup_user: 'root'
