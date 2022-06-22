@@ -48,3 +48,8 @@
   src: git@github.com:status-im/infra-role-threatstack.git
   version: 90b3fa5df2c5b72402adce7e12cba0da44a7daa1
   scm: git
+
+- name: nextcloud
+  src: git@github.com:status-im/infra-role-nextcloud.git
+  version: 68d18cc6247b974570bd5145f72cefb9c277eb65
+  scm: git
