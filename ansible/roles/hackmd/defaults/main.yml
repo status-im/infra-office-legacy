@@ -16,6 +16,9 @@ hackmd_app_cont_vol: '{{ hackmd_service_path }}/app'
 hackmd_app_cont_uploads: '{{ hackmd_app_cont_vol }}/uploads'
 hackmd_app_cont_uid: 1500
 hackmd_app_host_uid: '{{ 100000 + hackmd_app_cont_uid | int }}'
+hackmd_session_life: '24h'
+# hackmd_session_secret: 'changeMeIfYouCare'
+
 # DB ---------------------------------------------------------------------------
 hackmd_db_cont_name: '{{ hackmd_service_name }}-db'
 hackmd_db_cont_vol: '{{ hackmd_service_path }}/db'

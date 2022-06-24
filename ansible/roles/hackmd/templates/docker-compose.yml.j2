@@ -45,6 +45,10 @@ services:
 {% else %}
       CMD_IMAGE_UPLOAD_TYPE: 'filesystem'
 {% endif %}
+      CMD_SESSION_LIFE: '{{ hackmd_session_life | community.general.to_time_unit('ms') | int}}'
+{% if hackmd_session_secret is defined and hackmd_session_secret %}
+      CMD_SESSION_SECRET: '{{ hackmd_session_secret }}'
+{% endif %}
     depends_on:
       - 'db'
     healthcheck:
