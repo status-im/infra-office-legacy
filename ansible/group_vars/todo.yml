@@ -12,6 +12,9 @@ hackmd_gg_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/google", field="se
 hackmd_gh_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/github", field="client-id") }}'
 hackmd_gh_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/github", field="secret") }}'
 hackmd_gh_oauth_orgs: ['status-im']
+# Session settings
+hackmd_session_life: '5d'
+hackmd_session_secret: '{{lookup("bitwarden", "hackmd/session_key", field="password")}}'
 
 # Wekan
 wekan_domain: 'boards.status.im'
