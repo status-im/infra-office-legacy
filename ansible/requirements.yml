@@ -26,12 +26,12 @@
 
 - name: restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: b0debe383d45eac9e280dc3a143957b05fdc0c73
+  version: 4367541946452f135fcb66ddfc7ca152617a04a1
   scm: git
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: 50eda0808cceaaad2a5c5cdb4493935f2e3a637d
+  version: f06a8b8fea18523c2f576e6b72aa5b37dce7d290
   scm: git
 
 - name: infra-role-wireguard
@@ -51,5 +51,5 @@
 
 - name: nextcloud
   src: git@github.com:status-im/infra-role-nextcloud.git
-  version: 68d18cc6247b974570bd5145f72cefb9c277eb65
+  version: 4dfadb58e06a2116b750994c14fe5cc122ae2ecb
   scm: git
