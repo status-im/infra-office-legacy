@@ -5,5 +5,6 @@ output "hosts" {
     module.keycloak.hosts,
     module.nextcloud.hosts,
     module.todo.hosts,
+    module.wekan.hosts,
   )
 }

@@ -6,6 +6,7 @@ node-01.do-ams3.gitea.office hostname=node-01.do-ams3.gitea.office ansible_host=
 node-01.do-ams3.keycloak.office hostname=node-01.do-ams3.keycloak.office ansible_host=206.189.241.168 env=keycloak stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.keycloak.office.statusim.net
 node-01.do-ams3.nextcloud.office hostname=node-01.do-ams3.nextcloud.office ansible_host=64.225.82.112 env=nextcloud stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.nextcloud.office.statusim.net
 node-01.do-ams3.todo.office hostname=node-01.do-ams3.todo.office ansible_host=178.128.140.226 env=todo stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.todo.office.statusim.net
+node-01.do-ams3.wekan.office hostname=node-01.do-ams3.wekan.office ansible_host=174.138.107.118 env=wekan stage=office data_center=do-ams3 region=ams3 dns_entry=node-01.do-ams3.wekan.office.statusim.net
 
 [crm]
 node-01.do-ams3.crm.office
@@ -19,6 +20,7 @@ node-01.do-ams3.gitea.office
 node-01.do-ams3.keycloak.office
 node-01.do-ams3.nextcloud.office
 node-01.do-ams3.todo.office
+node-01.do-ams3.wekan.office
 
 [gitea]
 node-01.do-ams3.gitea.office
@@ -43,4 +45,10 @@ node-01.do-ams3.todo.office
 
 [todo.office]
 node-01.do-ams3.todo.office
+
+[wekan]
+node-01.do-ams3.wekan.office
+
+[wekan.office]
+node-01.do-ams3.wekan.office
 
