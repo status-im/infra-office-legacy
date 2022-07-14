@@ -21,7 +21,7 @@
 
 - name: systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: c6bbc3d1b4b0ba603d82fa06cd17297d12523182
+  version: 4ad0a9bfb57fcc1c1e7322c2a2293e726edb98f7
   scm: git
 
 - name: restic-backups
@@ -31,7 +31,7 @@
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: f06a8b8fea18523c2f576e6b72aa5b37dce7d290
+  version: e7bc4c0145ca98d0bbb5e986fd9b1ebf98a4535c
   scm: git
 
 - name: infra-role-wireguard
@@ -46,7 +46,7 @@
 
 - name: threatstack
   src: git@github.com:status-im/infra-role-threatstack.git
-  version: 90b3fa5df2c5b72402adce7e12cba0da44a7daa1
+  version: 581bf6f1bd8b0d4873a77166b9ceb48a417565eb
   scm: git
 
 - name: nextcloud

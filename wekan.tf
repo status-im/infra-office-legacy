@@ -8,3 +8,11 @@ module "wekan" {
 
   open_tcp_ports = ["80", "443"]
 }
+
+resource "cloudflare_record" "boards" {
+  zone_id = local.zones["status.im"]
+  name    = "boards"
+  type    = "A"
+  proxied = true
+  value   = module.wekan.public_ips[0]
+}

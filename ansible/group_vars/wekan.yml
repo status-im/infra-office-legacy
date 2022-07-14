@@ -1,0 +1,46 @@
+---
+# Wekan
+wekan_domain: 'boards.status.im'
+wekan_app_cont_port: 8280
+wekan_smtp_port: 587
+wekan_smtp_host: 'smtp.mailgun.org'
+wekan_smtp_user: '{{lookup("bitwarden", "MailGun", field="smtp-user")}}'
+wekan_smtp_pass: '{{lookup("bitwarden", "MailGun", field="smtp-pass")}}'
+wekan_smtp_from: 'Status.im Wekan Boards <wekan@mgun.status.im>'
+
+# Restic Backups
+restic_user_groups: ['dockremap', 'docker']
+restic_backups:
+  - name: 'wekan-db'
+    tags: ['mongodump']
+    path: '/docker/wekan/db/backup'
+    after: 'dump-wekan-db.service'
+    frequency: 'daily'
+    timeout: 120
+
+# Open Nginx Ports
+open_ports_default_comment: 'Nginx'
+open_ports_default_chain: 'SERVICES'
+open_ports_list:
+  - { port: 80  }
+  - { port: 443 }
+
+# Nginx SSL Proxy configuration
+nginx_sites:
+  wekan_http:
+    - listen 80
+    - server_name {{ wekan_domain | mandatory }}
+    - return 301 https://$host$request_uri
+
+  wekan_ssl:
+    - listen 443 ssl
+    - server_name {{ wekan_domain }}
+
+    - ssl_certificate     /certs/origin.crt
+    - ssl_certificate_key /certs/origin.key
+
+    - proxy_set_header X-Frame-Options sameorigin
+
+    - location / {
+        proxy_pass http://localhost:{{ wekan_app_cont_port }}/;
+      }

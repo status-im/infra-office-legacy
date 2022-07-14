@@ -16,15 +16,6 @@ hackmd_gh_oauth_orgs: ['status-im']
 hackmd_session_life: '5d'
 hackmd_session_secret: '{{lookup("bitwarden", "hackmd/session_key", field="password")}}'
 
-# Wekan
-wekan_domain: 'boards.status.im'
-# SMTP
-wekan_smtp_port: 587
-wekan_smtp_host: 'smtp.mailgun.org'
-wekan_smtp_user: '{{lookup("bitwarden", "MailGun", field="smtp-user")}}'
-wekan_smtp_pass: '{{lookup("bitwarden", "MailGun", field="smtp-pass")}}'
-wekan_smtp_from: 'Status.im Wekan Boards <wekan@mgun.status.im>'
-
 # Shlink URL shortener
 shlink_domain: 'link.status.im'
 shlink_admin_domain: 'admin-link.status.im'
@@ -46,13 +37,6 @@ restic_backups:
     tags: ['pgdumpdir']
     path: '/docker/hackmd/db/backup'
     after: 'dump-hackmd-db.service'
-    frequency: 'daily'
-    timeout: 120
-
-  - name: 'wekan-db'
-    tags: ['mongodump']
-    path: '/docker/wekan/db/backup'
-    after: 'dump-wekan-db.service'
     frequency: 'daily'
     timeout: 120
 

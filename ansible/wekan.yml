@@ -9,15 +9,12 @@
     - local_action: command ./versioncheck.py
       changed_when: false
 
-- name: Configure Octobox, HackMD, ShLink
-  hosts: todo
+- name: Configure Wekan kanban board
+  hosts: wekan
   roles:
     - { role: swap-file,      tags: swap-file }
     - { role: open-ports,     tags: open-ports }
     - { role: origin-certs,   tags: origin-certs }
-    - { role: hackmd,         tags: hackmd }
-    - { role: octobox,        tags: octobox }
-    - { role: shlink,         tags: shlink }
+    - { role: wekan,          tags: wekan }
     - { role: nginx,          tags: nginx }
     - { role: restic-backups, tags: restic-backups }
-    - { role: threatstack,    tags: threatstack }
