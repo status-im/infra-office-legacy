@@ -6,7 +6,7 @@
 
 - name: origin-certs
   src: git@github.com:status-im/infra-role-origin-certs.git
-  version: 60587f86e085255b537cc37647003af105214d20
+  version: f2b061da8976444d6576b755578f0e799cde4372
   scm: git
 
 - name: open-ports
@@ -21,7 +21,7 @@
 
 - name: systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: 4ad0a9bfb57fcc1c1e7322c2a2293e726edb98f7
+  version: 4009905f62f6bd9e02ceb94346dd06ab2a06fc15
   scm: git
 
 - name: restic-backups
@@ -31,7 +31,7 @@
 
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: e7bc4c0145ca98d0bbb5e986fd9b1ebf98a4535c
+  version: 356394892900dd5ca26c41e5315c31cb2d8786bf
   scm: git
 
 - name: infra-role-wireguard
