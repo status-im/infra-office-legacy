@@ -3,7 +3,7 @@ module "wekan" {
 
   env    = "wekan"
   group  = "wekan"
-  type   = "s-2vcpu-4gb"
+  type   = "m-1vcpu-8gb"
   domain = var.domain
 
   open_tcp_ports = ["80", "443"]
