@@ -12,10 +12,10 @@
 - name: Configure Keycloak
   hosts: keycloak
   roles:
-    - { role: origin-certs,   tags: origin-certs }
-    - { role: open-ports,     tags: open-ports }
-    - { role: swap-file,      tags: swap-file }
-    - { role: keycloak,       tags: keycloak }
-    - { role: restic-backups, tags: restic-backups }
-    - { role: nginx,          tags: nginx }
-    - { role: threatstack,    tags: threatstack }
+    - { role: origin-certs,        tags: origin-certs }
+    - { role: open-ports,          tags: open-ports }
+    - { role: swap-file,           tags: swap-file }
+    - { role: infra-role-keycloak, tags: keycloak }
+    - { role: restic-backups,      tags: restic-backups }
+    - { role: nginx,               tags: nginx }
+    - { role: threatstack,         tags: threatstack }

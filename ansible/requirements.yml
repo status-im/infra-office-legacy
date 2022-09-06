@@ -36,7 +36,7 @@
 
 - name: infra-role-wireguard
   src: git@github.com:status-im/infra-role-wireguard.git
-  version: 9d8c93bc44ec123b81b9912f10e377e9b953ea5a
+  version: 544b1f0435d5ca47168236c42b6a077c44d5eb4a
   scm: git
 
 - name: consul-service
@@ -52,4 +52,9 @@
 - name: nextcloud
   src: git@github.com:status-im/infra-role-nextcloud.git
   version: 4dfadb58e06a2116b750994c14fe5cc122ae2ecb
+  scm: git
+
+- name: infra-role-keycloak
+  src: git@github.com:status-im/infra-role-keycloak.git
+  version: a5f8a1ac264252afc147bce49570adde469ca5d7
   scm: git
