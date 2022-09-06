@@ -56,5 +56,5 @@
 
 - name: infra-role-keycloak
   src: git@github.com:status-im/infra-role-keycloak.git
-  version: a5f8a1ac264252afc147bce49570adde469ca5d7
+  version: 071bb17def98b7c5c9253e6d5a8414dfe9c5b6ab
   scm: git
