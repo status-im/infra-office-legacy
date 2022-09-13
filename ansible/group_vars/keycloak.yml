@@ -6,7 +6,7 @@ swap_file_size_mb: 2048
 keycloak_domain: 'auth.status.im'
 keycloak_admin_domain: 'keycloak.infra.status.im'
 keycloak_admin_username: 'admin'
-keycloak_admin_password: '{{ lookup("passwordstore", "services/keycloak/admin-pass") }}'
+keycloak_admin_password: '{{ lookup("passwordstore", "services/keycloak/status/admin-pass") }}'
 keycloak_app_cont_public_port: 8080
 
 # Restic Backups
