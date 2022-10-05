@@ -12,7 +12,7 @@ module "wekan" {
 resource "cloudflare_record" "boards" {
   zone_id = local.zones["status.im"]
   name    = "boards"
-  type    = "A"
-  proxied = true
-  value   = module.wekan.public_ips[0]
+  value   = "proxy.infra.status.im"
+  type    = "CNAME"
+  proxied = false
 }

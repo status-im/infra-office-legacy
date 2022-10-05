@@ -5,9 +5,11 @@
     consul_config_name: '{{ wekan_app_cont_name }}'
     consul_services:
       - name: '{{ wekan_app_cont_name }}'
-        tags: ['wekan', 'misc']
-        # we advertise the port with basic auth
+        tags: ['wekan', 'misc', 'ssl-proxy-backend']
         port: '{{ wekan_app_cont_port }}'
+        address: '{{ ansible_local.wireguard.address }}'
+        meta:
+          proxy_fqdn: '{{ wekan_domain }}'
         checks:
           - id: wekan-status
             name: Wekan Healthcheck

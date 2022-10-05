@@ -19,28 +19,7 @@ restic_backups:
     timeout: 120
 
 # Open Nginx Ports
-open_ports_default_comment: 'Nginx'
-open_ports_default_chain: 'SERVICES'
+open_ports_default_comment: 'Wekan'
+open_ports_default_chain: 'VPN'
 open_ports_list:
-  - { port: 80  }
-  - { port: 443 }
-
-# Nginx SSL Proxy configuration
-nginx_sites:
-  wekan_http:
-    - listen 80
-    - server_name {{ wekan_domain | mandatory }}
-    - return 301 https://$host$request_uri
-
-  wekan_ssl:
-    - listen 443 ssl
-    - server_name {{ wekan_domain }}
-
-    - ssl_certificate     /certs/origin.crt
-    - ssl_certificate_key /certs/origin.key
-
-    - proxy_set_header X-Frame-Options sameorigin
-
-    - location / {
-        proxy_pass http://localhost:{{ wekan_app_cont_port }}/;
-      }
+  - { port: '{{ wekan_app_cont_port }}', ipset: 'proxy.misc' }
