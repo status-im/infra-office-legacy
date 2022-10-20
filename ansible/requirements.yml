@@ -58,3 +58,8 @@
   src: git@github.com:status-im/infra-role-keycloak.git
   version: 2aa715a6857ac53008df7e39f45e46e90e9fa4d4
   scm: git
+
+- name: infra-role-gitea
+  src: git@github.com:status-im/infra-role-gitea.git
+  version: bc5520c80c4fccdd0f77921c8775349740c4728a
+  scm: git
