@@ -9,12 +9,12 @@ services:
       - '127.0.0.1:{{ shlink_oauth_cont_port }}:{{ shlink_oauth_cont_port }}'
     command: |
       --provider='google'
-      --email-domain='{{ shlink_oauth_google_domain }}'
-      --redirect-url='https://{{ shlink_admin_domain }}/oauth2/callback'
-      --cookie-domain='{{ shlink_admin_domain }}'
-      --cookie-secret='{{ shlink_oauth_cookie_secret }}'
-      --client-id='{{ shlink_oauth_client_id }}'
-      --client-secret='{{ shlink_oauth_client_secret }}'
+      --email-domain='{{ shlink_oauth_google_domain | mandatory }}'
+      --redirect-url='https://{{ shlink_admin_domain | mandatory }}/oauth2/callback'
+      --cookie-domain='{{ shlink_admin_domain | mandatory }}'
+      --cookie-secret='{{ shlink_oauth_cookie_secret | mandatory }}'
+      --client-id='{{ shlink_oauth_client_id | mandatory }}'
+      --client-secret='{{ shlink_oauth_client_secret | mandatory }}'
       --http-address='0.0.0.0:{{ shlink_oauth_cont_port }}'
       --upstream='http://web:80/'
       --request-logging=false
