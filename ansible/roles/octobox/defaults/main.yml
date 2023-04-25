@@ -6,10 +6,10 @@ octobox_compose_file: '{{ octobox_service_path }}/docker-compose.yml'
 # General
 octobox_domain: 'gh.status.im'
 # Oauth
-octobox_oauth_client_id: '{{lookup("bitwarden", "octobox/oauth", field="id")}}'
-octobox_oauth_secret: '{{lookup("bitwarden", "octobox/oauth", field="secret")}}'
+#octobox_oauth_client_id: ~
+#octobox_oauth_secret: ~
 # Cookies
-octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secret")}}'
+#octobox_secret_key_base: ~
 
 # App --------------------------------------------------------------------------
 octobox_app_cont_name: '{{ octobox_service_name }}-app'

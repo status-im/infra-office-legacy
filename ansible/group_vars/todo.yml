@@ -16,6 +16,11 @@ hackmd_gh_oauth_orgs: ['status-im', 'waku-org', 'acid-info']
 hackmd_session_life: '5d'
 hackmd_session_secret: '{{lookup("bitwarden", "hackmd/session_key", field="password")}}'
 
+# Octobox
+octobox_oauth_client_id: '{{lookup("bitwarden", "octobox/oauth", field="id")}}'
+octobox_oauth_secret: '{{lookup("bitwarden", "octobox/oauth", field="secret")}}'
+octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secret")}}'
+
 # Shlink URL shortener
 shlink_domain: 'link.status.im'
 shlink_admin_domain: 'admin-link.status.im'
