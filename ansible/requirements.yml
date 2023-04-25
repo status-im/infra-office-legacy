@@ -1,4 +1,20 @@
 ---
+- name: infra-role-bootstrap-linux
+  src: git@github.com:status-im/infra-role-bootstrap-linux.git
+  scm: git
+
+- name: infra-role-wireguard
+  src: git@github.com:status-im/infra-role-wireguard.git
+  scm: git
+
+- name: consul-service
+  src: git@github.com:status-im/infra-role-consul-service.git
+  scm: git
+
+- name: systemd-timer
+  src: git@github.com:status-im/infra-role-systemd-timer.git
+  scm: git
+
 - name: nginx
   src: git@github.com:status-im/infra-role-nginx.git
   version: 3043c998cbc92a634a71dc48363b3e2525696d26
@@ -19,29 +35,9 @@
   version: 3fb0fb8d313ab388df1b38d516e2ff88b72a2cf7
   scm: git
 
-- name: systemd-timer
-  src: git@github.com:status-im/infra-role-systemd-timer.git
-  version: 0cc94695f3dada39213a87fbe923cd90e2a7d2c2
-  scm: git
-
 - name: restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
   version: 4367541946452f135fcb66ddfc7ca152617a04a1
-  scm: git
-
-- name: infra-role-bootstrap-linux
-  src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  version: 484143ba5105f531009e4cb4f902c6fe44716362
-  scm: git
-
-- name: infra-role-wireguard
-  src: git@github.com:status-im/infra-role-wireguard.git
-  version: 6c83e0bdcecba772e5c652c89e1995865d14c662
-  scm: git
-
-- name: consul-service
-  src: git@github.com:status-im/infra-role-consul-service.git
-  version: 4849a3c9d7f2045669880e4e17eeb71980b2e4d0
   scm: git
 
 - name: threatstack
@@ -56,7 +52,7 @@
 
 - name: infra-role-keycloak
   src: git@github.com:status-im/infra-role-keycloak.git
-  version: 2aa715a6857ac53008df7e39f45e46e90e9fa4d4
+  version: 1e0ac0dd0cae95ae5c736eb19e0bff2aea089491
   scm: git
 
 - name: infra-role-gitea
