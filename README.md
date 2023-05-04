@@ -18,6 +18,7 @@ This repo configures infrastructure for cloud office services.
 
 # Services
 
+* [daybyday-crm](ansible/roles/daybyday-crm) - [DayByDayCRM](https://github.com/Bottelet/DaybydayCRM) platform
 * [gitea](ansible/roles/gitea) - [Gitea](https://gitea.io/) Git Web Frontent
 * [hackmd](ansible/roles/hackmd) - HackMD instance for our use
 * [keycloak](ansible/roles/keycloak) - Identity and Access Management
