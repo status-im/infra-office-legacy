@@ -1,6 +1,7 @@
 locals {
   ddos_protected = [
     { domain = "cloud.status.im", paused = true },
+    { domain = "notes.status.im", paused = false },
     { domain = "repos.status.im", paused = false },
   ]
 }
