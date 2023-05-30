@@ -19,5 +19,6 @@
     - { role: octobox,        tags: octobox }
     - { role: shlink,         tags: shlink }
     - { role: nginx,          tags: nginx }
+    - { role: nginx-metrics,  tags: nginx-metrics }
     - { role: restic-backups, tags: restic-backups }
     - { role: threatstack,    tags: threatstack }
