@@ -9,7 +9,7 @@ hackmd_debug: false
 
 # App --------------------------------------------------------------------------
 hackmd_app_cont_name: '{{ hackmd_service_name }}-app'
-hackmd_app_cont_tag: '2.4.1-1'
+hackmd_app_cont_tag: '2.4.2-1'
 hackmd_app_cont_image: 'statusteam/hackmd:{{ hackmd_app_cont_tag }}'
 hackmd_app_cont_port: 3001
 hackmd_app_cont_vol: '{{ hackmd_service_path }}/app'
