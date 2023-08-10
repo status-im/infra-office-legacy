@@ -50,11 +50,6 @@
   version: 581bf6f1bd8b0d4873a77166b9ceb48a417565eb
   scm: git
 
-- name: nextcloud
-  src: git@github.com:status-im/infra-role-nextcloud.git
-  version: 4dfadb58e06a2116b750994c14fe5cc122ae2ecb
-  scm: git
-
 - name: infra-role-keycloak
   src: git@github.com:status-im/infra-role-keycloak.git
   version: 1e0ac0dd0cae95ae5c736eb19e0bff2aea089491
