@@ -52,5 +52,5 @@
 
 - name: infra-role-gitea
   src: git@github.com:status-im/infra-role-gitea.git
-  version: bc5520c80c4fccdd0f77921c8775349740c4728a
+  version: 6c40ef08bfe6e229b2d5b50c91465b5cc2751f62
   scm: git
