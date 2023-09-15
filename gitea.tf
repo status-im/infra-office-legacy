@@ -8,7 +8,7 @@ module "gitea" {
   type   = "s-1vcpu-2gb"
   domain = var.domain
 
-  data_vol_size = 30
+  data_vol_size = 50
 
   open_tcp_ports = ["80", "443", "2222"]
 }
