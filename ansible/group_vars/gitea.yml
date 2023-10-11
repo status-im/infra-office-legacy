@@ -36,6 +36,7 @@ open_ports_list:
 
 # Restic Backups
 restic_user_groups: ['dockremap', 'docker']
+restic_pruning_retention: 1
 restic_backups:
   - name: 'gitea-db'
     tags: ['pgdumpdir']
