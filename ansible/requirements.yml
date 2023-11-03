@@ -22,7 +22,7 @@
 
 - name: nginx-metrics
   src: git@github.com:status-im/infra-role-nginx-metrics.git
-  version: ac90f648f6b2431b2f33bf3a6c35d0b7e930d7c9
+  version: c0bc0325c11a4f1a5692b6d61efe5bde8c33aa41
   scm: git
 
 - name: origin-certs
@@ -32,7 +32,7 @@
 
 - name: open-ports
   src: git@github.com:status-im/infra-role-open-ports.git
-  version: 24dc30dbdf85e6758cb6924074b2f7a0f4541524
+  version: 7f2d730d60a3efc9e5e96e4c55490b7f9e0fd70e
   scm: git
 
 - name: swap-file
