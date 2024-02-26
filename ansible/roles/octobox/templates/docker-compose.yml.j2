@@ -12,6 +12,7 @@ services:
       RAILS_LOG_TO_STDOUT:       'true'
       RAILS_SERVE_STATIC_FILES:  'true'
       MINIMUM_REFRESH_INTERVAL:  '10'
+      WEB_CONCURRENCY:           '{{ ansible_processor_vcpus }}'
       SECRET_KEY_BASE:           '{{ octobox_secret_key_base | mandatory }}'
       GITHUB_CLIENT_ID:          '{{ octobox_oauth_client_id | mandatory }}'
       GITHUB_CLIENT_SECRET:      '{{ octobox_oauth_secret | mandatory }}'
