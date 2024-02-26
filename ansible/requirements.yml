@@ -42,7 +42,7 @@
 
 - name: restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: 22f3bd44257d9b5b47db49e06f445ee8003be079
+  version: eced13036ea90255f9a469e821d70f91e1049163
   scm: git
 
 - name: threatstack
