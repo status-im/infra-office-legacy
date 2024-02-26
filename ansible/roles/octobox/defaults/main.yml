@@ -14,7 +14,7 @@ octobox_domain: 'gh.status.im'
 # App --------------------------------------------------------------------------
 octobox_app_cont_name: '{{ octobox_service_name }}-app'
 octobox_app_cont_vol: '{{ octobox_service_path }}/app'
-octobox_app_cont_tag: '7d9249ed'
+octobox_app_cont_tag: 'dd17517c'
 octobox_app_cont_image: 'statusteam/octobox:{{ octobox_app_cont_tag }}'
 octobox_app_cont_port: 3000
 # Database ---------------------------------------------------------------------
