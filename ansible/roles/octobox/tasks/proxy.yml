@@ -1,7 +1,6 @@
 ---
 - name: Configure nginx proxy for Octobox
-  include_role:
-    name: nginx
+  include_role: name=infra-role-nginx
   vars:
     nginx_configs:
       octobox_rate_limiting:
@@ -15,10 +14,10 @@
       octobox_https:
         - listen 443 ssl http2
         - server_name {{ octobox_domain }}
-    
+
         - ssl_certificate     /certs/origin.crt
         - ssl_certificate_key /certs/origin.key
-    
+
         - location / {
             limit_req zone=octobox_by_ip burst=30 nodelay;
             proxy_set_header Host $proxy_host;

@@ -12,11 +12,11 @@
 - name: Configure Gitea host
   hosts: gitea
   roles:
-    - { role: swap-file,        tags: swap-file }
-    - { role: origin-certs,     tags: origin-certs }
-    - { role: threatstack,      tags: threatstack }
-    - { role: infra-role-gitea, tags: gitea }
-    - { role: gitea-mirrors,    tags: gitea-mirrors }
-    - { role: restic-backups,   tags: restic-backups }
-    - { role: nginx,            tags: nginx }
-    - { role: open-ports,       tags: open-ports }
+    - { role: infra-role-swap-file,      tags: swap-file }
+    - { role: infra-role-open-ports,     tags: open-ports }
+    - { role: infra-role-origin-certs,   tags: origin-certs }
+    - { role: infra-role-gitea,          tags: gitea }
+    - { role: gitea-mirrors,             tags: gitea-mirrors }
+    - { role: infra-role-restic-backups, tags: restic-backups }
+    - { role: infra-role-nginx,          tags: nginx }
+    - { role: infra-role-threatstack,    tags: threatstack }

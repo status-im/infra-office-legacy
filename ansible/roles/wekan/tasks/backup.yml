@@ -1,6 +1,6 @@
 ---
 - name: 'Create timer for MongoDB backup: {{ wekan_db_backup_name }}'
-  include_role: name=systemd-timer
+  include_role: name=infra-role-systemd-timer
   vars:
     systemd_timer_name: '{{ wekan_db_backup_name }}'
     systemd_timer_description: 'MondoDB backup script'

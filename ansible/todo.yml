@@ -12,13 +12,13 @@
 - name: Configure Octobox, HackMD, ShLink
   hosts: todo
   roles:
-    - { role: swap-file,      tags: swap-file }
-    - { role: open-ports,     tags: open-ports }
-    - { role: origin-certs,   tags: origin-certs }
-    - { role: hackmd,         tags: hackmd }
-    - { role: octobox,        tags: octobox }
-    - { role: shlink,         tags: shlink }
-    - { role: nginx,          tags: nginx }
-    - { role: nginx-metrics,  tags: nginx-metrics }
-    - { role: restic-backups, tags: restic-backups }
-    - { role: threatstack,    tags: threatstack }
+    - { role: infra-role-swap-file,      tags: swap-file }
+    - { role: infra-role-open-ports,     tags: open-ports }
+    - { role: infra-role-origin-certs,   tags: origin-certs }
+    - { role: hackmd,                    tags: hackmd }
+    - { role: octobox,                   tags: octobox }
+    - { role: shlink,                    tags: shlink }
+    - { role: infra-role-nginx,          tags: nginx }
+    - { role: infra-role-nginx-metrics,  tags: nginx-metrics }
+    - { role: infra-role-restic-backups, tags: restic-backups }
+    - { role: infra-role-threatstack,    tags: threatstack }

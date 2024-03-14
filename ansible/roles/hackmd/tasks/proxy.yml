@@ -1,7 +1,6 @@
 ---
 - name: HackMD | Configure nginx proxy
-  include_role:
-    name: nginx
+  include_role: name=infra-role-nginx
   vars:
     nginx_configs:
       hackmd_rate_limiting:
@@ -16,10 +15,10 @@
       hackmd_ssl:
         - listen 443 ssl
         - server_name {{ hackmd_domain }}
-    
+
         - ssl_certificate     /certs/origin.crt
         - ssl_certificate_key /certs/origin.key
-    
+
         - proxy_set_header X-Frame-Options sameorigin
 
         # Script kiddies like scanning paths, so we rate limit most.

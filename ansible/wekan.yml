@@ -12,7 +12,7 @@
 - name: Configure Wekan kanban board
   hosts: wekan
   roles:
-    - { role: swap-file,      tags: swap-file      }
-    - { role: open-ports,     tags: open-ports     }
-    - { role: wekan,          tags: wekan          }
-    - { role: restic-backups, tags: restic-backups }
+    - { role: infra-role-swap-file,      tags: swap-file      }
+    - { role: infra-role-open-ports,     tags: open-ports     }
+    - { role: wekan,                     tags: wekan          }
+    - { role: infra-role-restic-backups, tags: restic-backups }

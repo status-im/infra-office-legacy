@@ -7,7 +7,7 @@
     mode: 0775
 
 - name: 'Create timer for PostgreSQL backup'
-  include_role: name=systemd-timer
+  include_role: name=infra-role-systemd-timer
   vars:
     systemd_timer_description: 'Backup {{ shlink_service_name }} PostgreSQL db as SQL.'
     systemd_timer_name: 'backup-{{ shlink_db_cont_name }}'
