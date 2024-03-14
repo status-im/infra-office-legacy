@@ -5,7 +5,6 @@ module "todo" {
   env    = "todo"
   group  = "todo"
   type   = "s-2vcpu-4gb"
-  domain = var.domain
 
   open_tcp_ports = ["80", "443"]
 }

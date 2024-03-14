@@ -6,7 +6,6 @@ module "gitea" {
   env    = "gitea"
   group  = "gitea"
   type   = "s-1vcpu-2gb"
-  domain = var.domain
 
   data_vol_size = 100
 
