@@ -5,7 +5,7 @@ module "gitea" {
 
   env    = "gitea"
   group  = "gitea"
-  type   = "s-1vcpu-2gb"
+  type   = "s-2vcpu-4gb"
 
   data_vol_size = 100
 
