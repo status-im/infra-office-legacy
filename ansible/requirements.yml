@@ -22,7 +22,7 @@
 
 - name: infra-role-nginx-metrics
   src: git@github.com:status-im/infra-role-nginx-metrics.git
-  version: c0bc0325c11a4f1a5692b6d61efe5bde8c33aa41
+  version: fdc31d5b233b1b3b1bd46338a3c64e0dd08641cf
   scm: git
 
 - name: infra-role-origin-certs
@@ -42,7 +42,7 @@
 
 - name: infra-role-restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: eced13036ea90255f9a469e821d70f91e1049163
+  version: 789a9c25d825e0d6fbec3cb7fa404e7dbb880921
   scm: git
 
 - name: infra-role-threatstack
