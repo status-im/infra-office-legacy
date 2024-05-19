@@ -37,12 +37,12 @@
 
 - name: infra-role-swap-file
   src: git@github.com:status-im/infra-role-swap-file.git
-  version: 3fb0fb8d313ab388df1b38d516e2ff88b72a2cf7
+  version: ada5240a37f569997dec867c600681226b268074
   scm: git
 
 - name: infra-role-restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
-  version: 789a9c25d825e0d6fbec3cb7fa404e7dbb880921
+  version: af6b0d7c196f9f4fa590810ddcac2b7bcdf8a83e
   scm: git
 
 - name: infra-role-threatstack
