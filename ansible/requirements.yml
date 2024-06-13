@@ -1,56 +1,43 @@
----
 - name: infra-role-bootstrap-linux
   src: git@github.com:status-im/infra-role-bootstrap-linux.git
-  scm: git
 
 - name: infra-role-wireguard
   src: git@github.com:status-im/infra-role-wireguard.git
-  scm: git
 
 - name: infra-role-consul-service
   src: git@github.com:status-im/infra-role-consul-service.git
-  scm: git
 
 - name: infra-role-systemd-timer
   src: git@github.com:status-im/infra-role-systemd-timer.git
-  scm: git
 
 - name: infra-role-nginx
   src: git@github.com:status-im/infra-role-nginx.git
   version: 3043c998cbc92a634a71dc48363b3e2525696d26
-  scm: git
 
 - name: infra-role-nginx-metrics
   src: git@github.com:status-im/infra-role-nginx-metrics.git
   version: fdc31d5b233b1b3b1bd46338a3c64e0dd08641cf
-  scm: git
 
 - name: infra-role-origin-certs
   src: git@github.com:status-im/infra-role-origin-certs.git
   version: f2b061da8976444d6576b755578f0e799cde4372
-  scm: git
 
 - name: infra-role-open-ports
   src: git@github.com:status-im/infra-role-open-ports.git
   version: ec9b3527285fb129cf0e65c5d6d17356eae6aa2d
-  scm: git
 
 - name: infra-role-swap-file
   src: git@github.com:status-im/infra-role-swap-file.git
   version: ada5240a37f569997dec867c600681226b268074
-  scm: git
 
 - name: infra-role-restic-backups
   src: git@github.com:status-im/infra-role-restic-backups.git
   version: af6b0d7c196f9f4fa590810ddcac2b7bcdf8a83e
-  scm: git
 
 - name: infra-role-threatstack
   src: git@github.com:status-im/infra-role-threatstack.git
   version: 581bf6f1bd8b0d4873a77166b9ceb48a417565eb
-  scm: git
 
 - name: infra-role-gitea
   src: git@github.com:status-im/infra-role-gitea.git
   version: 45d63139cff8e476d8792c9b258f715a0aafbdd7
-  scm: git
