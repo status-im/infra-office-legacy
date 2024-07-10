@@ -37,11 +37,3 @@
 - name: infra-role-threatstack
   src: git@github.com:status-im/infra-role-threatstack.git
   version: 581bf6f1bd8b0d4873a77166b9ceb48a417565eb
-
-- name: infra-role-gitea
-  src: git@github.com:status-im/infra-role-gitea.git
-  version: 45d63139cff8e476d8792c9b258f715a0aafbdd7
-
-- name: infra-role-gitea-mirrors
-  src: git@github.com:status-im/infra-role-gitea-mirrors.git
-  version: 94bc7de0119744b4d05485f63ef67f703a7d2438
