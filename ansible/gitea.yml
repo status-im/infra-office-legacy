@@ -16,7 +16,7 @@
     - { role: infra-role-open-ports,     tags: open-ports }
     - { role: infra-role-origin-certs,   tags: origin-certs }
     - { role: infra-role-gitea,          tags: gitea }
-    - { role: gitea-mirrors,             tags: gitea-mirrors }
+    - { role: infra-role-gitea-mirrors,  tags: gitea-mirrors }
     - { role: infra-role-restic-backups, tags: restic-backups }
     - { role: infra-role-nginx,          tags: nginx }
     - { role: infra-role-threatstack,    tags: threatstack }
