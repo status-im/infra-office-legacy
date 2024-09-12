@@ -16,7 +16,7 @@
     - { role: infra-role-open-ports,     tags: open-ports }
     - { role: infra-role-origin-certs,   tags: origin-certs }
     - { role: hackmd,                    tags: hackmd }
-    - { role: octobox,                   tags: octobox }
+    - { role: infra-role-octobox,        tags: octobox }
     - { role: infra-role-nginx,          tags: nginx }
     - { role: infra-role-nginx-metrics,  tags: nginx-metrics }
     - { role: infra-role-restic-backups, tags: restic-backups }
