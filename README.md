@@ -1,3 +1,5 @@
+# :warning: Legacy fleet repository. See `infra-office`.
+
 # Description
 
 This repo configures infrastructure for cloud office services.
