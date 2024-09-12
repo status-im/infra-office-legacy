@@ -12,7 +12,7 @@
 
 - name: infra-role-nginx
   src: git@github.com:status-im/infra-role-nginx.git
-  version: 3043c998cbc92a634a71dc48363b3e2525696d26
+  version: 285cc7aba6144571a2084d9eb06745700e065e18
 
 - name: infra-role-nginx-metrics
   src: git@github.com:status-im/infra-role-nginx-metrics.git
@@ -24,7 +24,7 @@
 
 - name: infra-role-open-ports
   src: git@github.com:status-im/infra-role-open-ports.git
-  version: c14d080ac034182353d64716bd48c2a04e2eb8e1
+  version: e817e4083de9a34e564f6713cdd7e51351569080
 
 - name: infra-role-swap-file
   src: git@github.com:status-im/infra-role-swap-file.git
