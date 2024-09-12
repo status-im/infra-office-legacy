@@ -45,3 +45,7 @@
 - name: infra-role-octobox
   src: git@github.com:status-im/infra-role-octobox.git
   version: 443ab9189f1a02d9db78e036b077a974ce64434b
+
+- name: infra-role-codimd
+  src: git@github.com:status-im/infra-role-codimd.git
+  version: 5d4164918a5ef2ec1cbecd0bd8cdb4bee22511e5

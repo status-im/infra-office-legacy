@@ -15,7 +15,7 @@
     - { role: infra-role-swap-file,      tags: swap-file }
     - { role: infra-role-open-ports,     tags: open-ports }
     - { role: infra-role-origin-certs,   tags: origin-certs }
-    - { role: hackmd,                    tags: hackmd }
+    - { role: infra-role-codimd,         tags: codimd }
     - { role: infra-role-octobox,        tags: octobox }
     - { role: infra-role-nginx,          tags: nginx }
     - { role: infra-role-nginx-metrics,  tags: nginx-metrics }

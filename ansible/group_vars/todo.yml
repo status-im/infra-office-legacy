@@ -1,20 +1,20 @@
 ---
 swap_file_size_mb: 4096
 
-# HackMD
-hackmd_domain: 'notes.status.im'
-hackmd_db_user: '{{lookup("bitwarden", "hackmd/db", field="username")}}'
-hackmd_db_pass: '{{lookup("bitwarden", "hackmd/db", field="password")}}'
+# CodiMD
+codimd_domain: 'notes.status.im'
+codimd_db_user: '{{lookup("bitwarden", "hackmd/db", field="username")}}'
+codimd_db_pass: '{{lookup("bitwarden", "hackmd/db", field="password")}}'
 # Google oauth
-hackmd_gg_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/google", field="client-id") }}'
-hackmd_gg_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/google", field="secret") }}'
+codimd_gg_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/google", field="client-id") }}'
+codimd_gg_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/google", field="secret") }}'
 # GitHub oauth
-hackmd_gh_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/github", field="client-id") }}'
-hackmd_gh_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/github", field="secret") }}'
-hackmd_gh_oauth_orgs: ['status-im', 'waku-org', 'acid-info']
+codimd_gh_oauth_id: '{{ lookup("bitwarden", "hackmd/oauth/github", field="client-id") }}'
+codimd_gh_oauth_secret: '{{ lookup("bitwarden", "hackmd/oauth/github", field="secret") }}'
+codimd_gh_oauth_orgs: ['status-im', 'waku-org', 'acid-info']
 # Session settings
-hackmd_session_life: '5d'
-hackmd_session_secret: '{{lookup("bitwarden", "hackmd/session_key", field="password")}}'
+codimd_session_life: '5d'
+codimd_session_secret: '{{lookup("bitwarden", "hackmd/session_key", field="password")}}'
 
 # Octobox
 octobox_oauth_client_id: '{{lookup("bitwarden", "octobox/oauth", field="id")}}'
@@ -24,10 +24,10 @@ octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secre
 # Restic Backups
 restic_user_groups: ['dockremap', 'docker']
 restic_backups:
-  - name: 'hackmd-db'
+  - name: 'codimd-db'
     tags: ['pgdumpdir']
-    path: '/docker/hackmd/db/backup'
-    after: 'dump-hackmd-db.service'
+    path: '/docker/codimd/db/backup'
+    after: 'dump-codimd-db.service'
     frequency: 'daily'
     timeout: 120
 
