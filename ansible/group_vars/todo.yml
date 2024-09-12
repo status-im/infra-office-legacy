@@ -21,20 +21,6 @@ octobox_oauth_client_id: '{{lookup("bitwarden", "octobox/oauth", field="id")}}'
 octobox_oauth_secret: '{{lookup("bitwarden", "octobox/oauth", field="secret")}}'
 octobox_secret_key_base: '{{lookup("bitwarden", "octobox/key-base", field="secret")}}'
 
-# Shlink URL shortener
-shlink_domain: 'link.status.im'
-shlink_admin_domain: 'admin-link.status.im'
-shlink_fallback_url: 'https://status.im/'
-shlink_db_cont_port: 5434
-shlink_app_cont_port: 8081
-shlink_web_cont_port: 8090
-shlink_oauth_cont_port: 8091
-# Admin OAuth
-shlink_oauth_google_domain: 'status.im'
-shlink_oauth_cookie_secret: '{{ lookup("bitwarden", "cookie-secret", field="secret") }}'
-shlink_oauth_client_id: '{{ lookup("bitwarden", "shlink/oauth", field="client-id") }}'
-shlink_oauth_client_secret: '{{ lookup("bitwarden", "shlink/oauth", field="secret") }}'
-
 # Restic Backups
 restic_user_groups: ['dockremap', 'docker']
 restic_backups:
@@ -44,12 +30,6 @@ restic_backups:
     after: 'dump-hackmd-db.service'
     frequency: 'daily'
     timeout: 120
-
-  - name: 'shlink-db'
-    path: '/docker/shlink/db/backup'
-    tags: ['pgdumpdir']
-    after: 'dump-shlink-db.service'
-    frequency: 'daily'
 
 # Nginx Metrics
 nginx_metrics_nginx_status_port: 9112

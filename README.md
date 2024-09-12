@@ -8,15 +8,12 @@ This repo configures infrastructure for cloud office services.
 |--------------------------|-----------------------------------|
 | HackMD Notes             | https://notes.status.im/          |
 | Octobox GitHub Inbox     | https://gh.status.im/             |
-| URL Shortener            | https://link.status.im/           |
-| URL Shortener Admin      | https://admin-link.status.im/     |
 
 # Services
 
 * [daybyday-crm](ansible/roles/daybyday-crm) - [DayByDayCRM](https://github.com/Bottelet/DaybydayCRM) platform
 * [hackmd](ansible/roles/hackmd) - HackMD instance for our use
 * [octobox](ansible/roles/octobox) - Octobox GitHub notifications helper
-* [shlink](ansible/roles/shlink) - Shlink URL shortener service
 
 # Repo Usage
 

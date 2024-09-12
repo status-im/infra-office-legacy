@@ -26,21 +26,3 @@ resource "cloudflare_record" "notes" {
   proxied = true
   value   = module.todo.public_ips[0]
 }
-
-/* ShLink */
-resource "cloudflare_record" "link" {
-  zone_id = local.zones["status.im"]
-  name    = "link"
-  type    = "A"
-  proxied = true
-  value   = module.todo.public_ips[0]
-}
-
-/* ShLink Admin Panel */
-resource "cloudflare_record" "admin_link" {
-  zone_id = local.zones["status.im"]
-  name    = "admin-link"
-  type    = "A"
-  proxied = true
-  value   = module.todo.public_ips[0]
-}

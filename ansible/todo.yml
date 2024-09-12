@@ -9,7 +9,7 @@
     - local_action: command ./roles.py --check
       changed_when: false
 
-- name: Configure Octobox, HackMD, ShLink
+- name: Configure Octobox, HackMD
   hosts: todo
   roles:
     - { role: infra-role-swap-file,      tags: swap-file }
@@ -17,7 +17,6 @@
     - { role: infra-role-origin-certs,   tags: origin-certs }
     - { role: hackmd,                    tags: hackmd }
     - { role: octobox,                   tags: octobox }
-    - { role: shlink,                    tags: shlink }
     - { role: infra-role-nginx,          tags: nginx }
     - { role: infra-role-nginx-metrics,  tags: nginx-metrics }
     - { role: infra-role-restic-backups, tags: restic-backups }
